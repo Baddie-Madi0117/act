@@ -643,6 +643,105 @@
   .parent-note-display.visible { display: block; }
   .parent-note-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #7A5800; margin-bottom: 6px; }
 
+  /* WRONG ANSWER LOG */
+  .wal-form {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.25rem;
+  }
+  .wal-form h4 { font-size: 14px; font-weight: 600; margin-bottom: 1rem; }
+  .wal-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .wal-field label { display: block; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .wal-field select, .wal-field input, .wal-field textarea {
+    width: 100%; padding: 8px 10px; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); font-size: 13px; font-family: inherit;
+    color: var(--text); background: var(--bg);
+  }
+  .wal-field select:focus, .wal-field input:focus, .wal-field textarea:focus {
+    outline: 2px solid var(--accent); border-color: transparent;
+  }
+  .wal-field.full { grid-column: 1 / -1; }
+  .wal-field textarea { min-height: 70px; resize: vertical; }
+  .wal-submit {
+    padding: 8px 20px; background: var(--accent); color: #fff;
+    border: none; border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.15s;
+  }
+  .wal-submit:hover { opacity: 0.85; }
+  .wal-entries { margin-top: 1rem; }
+  .wal-entry {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px 14px; margin-bottom: 8px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .wal-entry-subject {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px;
+    flex-shrink: 0; white-space: nowrap; margin-top: 1px;
+  }
+  .wal-entry-body { flex: 1; min-width: 0; }
+  .wal-entry-concept { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .wal-entry-lesson { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .wal-entry-date { font-size: 11px; color: var(--hint); margin-top: 3px; }
+  .wal-entry-delete {
+    font-size: 16px; color: var(--hint); cursor: pointer; flex-shrink: 0;
+    background: none; border: none; padding: 0; line-height: 1;
+  }
+  .wal-entry-delete:hover { color: var(--full); }
+  .wal-empty { font-size: 13px; color: var(--muted); padding: 1rem 0; }
+  .wal-filter { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .wal-filter-btn {
+    font-size: 12px; padding: 4px 12px; border-radius: 14px;
+    border: 1px solid var(--border); background: var(--surface);
+    cursor: pointer; color: var(--muted); transition: all 0.15s;
+  }
+  .wal-filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .wal-count { font-size: 12px; color: var(--muted); margin-left: auto; align-self: center; }
+
+  /* DIRECTIONS TAB */
+  .dir-hero {
+    background: linear-gradient(135deg, #1855A3 0%, #6B3BBF 100%);
+    color: #fff; border-radius: var(--radius); padding: 2rem;
+    margin-bottom: 1.5rem; text-align: center;
+  }
+  .dir-hero h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .dir-hero p { font-size: 14px; opacity: 0.85; line-height: 1.6; max-width: 500px; margin: 0 auto; }
+  .dir-section { margin-bottom: 1.75rem; }
+  .dir-section-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dir-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 8px;
+  }
+  .dir-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .dir-card p, .dir-card li { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .dir-card ul { padding-left: 1.2rem; margin-top: 6px; }
+  .dir-card li { margin-bottom: 4px; }
+  .dir-card strong { color: var(--text); }
+  .dir-highlight {
+    background: #FFF8E7; border: 1px solid #F5D87A;
+    border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 8px;
+  }
+  .dir-highlight h4 { font-size: 14px; font-weight: 600; color: #7A5800; margin-bottom: 6px; }
+  .dir-highlight p, .dir-highlight li { font-size: 13px; color: #5A4000; line-height: 1.65; }
+  .dir-highlight ul { padding-left: 1.2rem; margin-top: 6px; }
+  .dir-highlight li { margin-bottom: 4px; }
+  .dir-step {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 8px;
+  }
+  .dir-step-num {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+    color: #fff; font-size: 13px; font-weight: 700; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .dir-step-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .dir-step-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .dir-step-body strong { color: var(--text); }
+
   /* HIDDEN */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
@@ -668,6 +767,8 @@
 <!-- TABS -->
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('student')">📚 Student</button>
+  <button class="tab-btn" onclick="switchTab('directions')">📋 How It Works</button>
+  <button class="tab-btn" onclick="switchTab('wronglog')">❌ Wrong Answer Log</button>
   <button class="tab-btn" onclick="switchTab('parent')">👨‍👩‍👧 Parent</button>
   <button class="tab-btn" onclick="switchTab('practice')">🎯 Parent Practice</button>
   <button class="tab-btn" onclick="switchTab('resources')">🔗 Resources</button>
@@ -790,6 +891,220 @@
   </div>
 </div>
 
+<!-- DIRECTIONS TAB -->
+<div class="tab-content" id="tab-directions">
+  <div class="main">
+
+    <div class="dir-hero">
+      <h2>Welcome to your ACT Study Plan 🎯</h2>
+      <p>This is your home base for the next 4 weeks. Everything you need is here — your daily tasks, practice resources, a timer, and a place to track your progress. Read this page first so you know exactly what to do every day.</p>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">🗓️ The big picture</div>
+      <div class="dir-card">
+        <h4>What this plan is built to do</h4>
+        <p>You've taken the ACT before and scored an 18 composite. Your target is a <strong>24</strong> for Bright Futures Florida Medallion Scholars. That's 6 points — less than 2 points per section. This plan targets your specific weak areas based on your actual score reports, so you're not wasting time on things you already know.</p>
+      </div>
+      <div class="dir-card">
+        <h4>How the 4 weeks break down</h4>
+        <ul>
+          <li><strong>Week 1 (June 16–22):</strong> Learn the strategies. Understand how each section works and what the ACT is actually testing.</li>
+          <li><strong>Week 2 (June 23–29):</strong> Build volume. More practice, longer sections, start timing yourself.</li>
+          <li><strong>Week 3 (June 30–July 6):</strong> Take two full practice tests. Find what's still broken and drill it.</li>
+          <li><strong>Week 4 (July 7–11):</strong> Confidence mode. Light review, simulate test conditions, rest, and go.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">📋 What to do every single day</div>
+      <div class="dir-step">
+        <div class="dir-step-num">1</div>
+        <div class="dir-step-body">
+          <h4>Open the app and read your daily message</h4>
+          <p>There's a motivational message at the top of the Student tab every day. Read it. It's short and it's there for a reason.</p>
+        </div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-num">2</div>
+        <div class="dir-step-body">
+          <h4>Check today's tasks on the Student tab</h4>
+          <p>Find today's day card. Each task has a checkbox and a link to the resource. <strong>Click the link, do the work, come back and check the box.</strong> Don't check the box before you've done the task — the checkboxes are for your accountability, not just for show.</p>
+        </div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-num">3</div>
+        <div class="dir-step-body">
+          <h4>Use the Pomodoro timer</h4>
+          <p>Hit Start on the timer when you begin studying. Work for 25 minutes without your phone. Take the 5-minute break. Repeat. Most days need 3–4 rounds. If a section takes longer than 25 minutes, that's fine — just take your break and pick up where you left off.</p>
+        </div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-num">4</div>
+        <div class="dir-step-body">
+          <h4>Write your answers on paper — always</h4>
+          <p>When doing practice questions, <strong>always write your answers on paper</strong> before checking. This is non-negotiable. Writing makes you commit to an answer before you see if you're right. It's also how the real test works — you can't go back and change your thinking once you see the answer key.</p>
+        </div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-num">5</div>
+        <div class="dir-step-body">
+          <h4>Check your answers and log wrong ones</h4>
+          <p>After each practice set, check your answers using the resource's answer key. For every question you got wrong, go to the <strong>Wrong Answer Log tab</strong> and add an entry. Write the concept, why you got it wrong, and what you'll do differently. This is the most important habit in the whole plan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">✍️ The paper rule — why it matters</div>
+      <div class="dir-highlight">
+        <h4>⚠️ Always write before you check</h4>
+        <ul>
+          <li>For every practice question: write your answer choice (A, B, C, or D) on paper before moving on</li>
+          <li>For passages: underline the topic sentence of each paragraph as you read</li>
+          <li>For Science: write the independent and dependent variable of each experiment in the margin</li>
+          <li>For Math: show every step of your work — never skip steps, even if you think you know the answer</li>
+          <li>After a full section: score yourself (count wrong answers by section type) before looking at explanations</li>
+        </ul>
+        <p style="margin-top:8px;">The real ACT is on paper. Training your brain to work on paper now means no adjustment shock on test day.</p>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">⏱️ Using your extended time</div>
+      <div class="dir-card">
+        <h4>Your extended time allowance</h4>
+        <p>Because of your approved accommodation, you get <strong>50% more time</strong> on each section. Here's what that looks like:</p>
+        <ul>
+          <li><strong>English:</strong> 45 min → <strong>67 min</strong> (75 questions)</li>
+          <li><strong>Math:</strong> 60 min → <strong>90 min</strong> (60 questions)</li>
+          <li><strong>Reading:</strong> 35 min → <strong>52 min</strong> (40 questions)</li>
+          <li><strong>Science:</strong> 35 min → <strong>52 min</strong> (40 questions)</li>
+        </ul>
+        <p style="margin-top:8px;"><strong>When you practice timed sections, always use your extended time allotment.</strong> This is your real test condition. Getting used to 52 minutes for Reading (not 35) is part of your training.</p>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">💊 Medication timing</div>
+      <div class="dir-highlight">
+        <h4>Match your study time to your test time</h4>
+        <p>The ACT starts in the morning. Your medication should be taken at the <strong>same time every study session</strong> as you plan to take it on July 11th. If you study at noon every day but the test starts at 8am, your medication timing will be off on test day. Start practicing in the morning now so your brain is calibrated for the real thing.</p>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">📊 Practice tests — the most important sessions</div>
+      <div class="dir-card">
+        <h4>Three full practice tests are built into the schedule</h4>
+        <ul>
+          <li><strong>Test 1 (Week 1, Day 1):</strong> Diagnostic — just see where you are</li>
+          <li><strong>Test 2 (Week 2, Sunday):</strong> Measure your improvement from strategies</li>
+          <li><strong>Test 3 (Week 4, Sunday):</strong> Final confidence check before test day</li>
+        </ul>
+        <p style="margin-top:8px;">Always use <strong>official ACT practice tests from act.org</strong> — they are the most accurate. Score all four sections after each test and log them using the "Log practice score" button at the top of the page. Your superscore updates automatically.</p>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">🤝 Sunday check-ins with mom/dad</div>
+      <div class="dir-card">
+        <h4>Every Sunday you'll review the week together</h4>
+        <ul>
+          <li>Show your Wrong Answer Log — what did you keep getting wrong?</li>
+          <li>Walk through one math concept and teach it (yes, out loud — this is how you actually learn it)</li>
+          <li>Review your practice test score if you took one that week</li>
+          <li>Talk about what felt hard and what felt easier than before</li>
+        </ul>
+        <p style="margin-top:8px;">This isn't a quiz. It's a check-in to make sure the plan is working and adjust anything that isn't.</p>
+      </div>
+    </div>
+
+    <div class="dir-section">
+      <div class="dir-section-title">🏁 Test day — July 11</div>
+      <div class="dir-card">
+        <h4>The night before (July 10)</h4>
+        <ul>
+          <li>No studying — zero</li>
+          <li>Pack your bag: pencils (#2), photo ID, admission ticket (printed), snack, water, medication</li>
+          <li>Eat a real dinner, in bed by 9pm</li>
+        </ul>
+      </div>
+      <div class="dir-card">
+        <h4>The morning of (July 11)</h4>
+        <ul>
+          <li>Take medication at the same time you've been taking it during study sessions</li>
+          <li>Protein breakfast — eggs, not sugar cereal</li>
+          <li>Arrive 30 minutes early</li>
+          <li><strong>Use every minute of your extended time.</strong> There is no prize for finishing early. Check your work.</li>
+          <li>If you go blank on a question — circle it, skip it, come back. Never sit stuck.</li>
+        </ul>
+      </div>
+      <div class="dir-highlight">
+        <h4>💛 You've already done the hard part</h4>
+        <p>By the time July 11th arrives, you will have done hundreds of practice questions, three full practice tests, and four weeks of consistent work. The test is just showing what you already know. Trust the preparation.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WRONG ANSWER LOG TAB -->
+<div class="tab-content" id="tab-wronglog">
+  <div class="main">
+
+    <div style="background:var(--english-bg);border:1px solid #B5D4F4;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem;">
+      <div style="font-size:13px;color:var(--english);line-height:1.6;">
+        <strong>How to use this log:</strong> Every time you get a practice question wrong, add it here. Write the concept (e.g. "comma splices"), what you did wrong, and what the correct thinking is. This list becomes your personal study guide — the things that keep showing up here are exactly what to focus on. Your parent can see this log too.
+      </div>
+    </div>
+
+    <!-- ADD ENTRY FORM -->
+    <div class="wal-form">
+      <h4>Log a wrong answer</h4>
+      <div class="wal-fields">
+        <div class="wal-field">
+          <label>Subject</label>
+          <select id="wal-subject">
+            <option value="">— select —</option>
+            <option value="english">English</option>
+            <option value="math">Math</option>
+            <option value="reading">Reading</option>
+            <option value="science">Science</option>
+          </select>
+        </div>
+        <div class="wal-field">
+          <label>Concept / Topic</label>
+          <input type="text" id="wal-concept" placeholder="e.g. Comma splices, Probability, Main idea...">
+        </div>
+        <div class="wal-field full">
+          <label>What did I get wrong and why?</label>
+          <textarea id="wal-wrong" placeholder="e.g. I picked B but the answer was D. I forgot that semicolons can replace periods between two complete sentences."></textarea>
+        </div>
+        <div class="wal-field full">
+          <label>What's the correct approach for next time?</label>
+          <textarea id="wal-correct" placeholder="e.g. Check if both sides of the comma are complete sentences. If yes, use a semicolon or add a conjunction."></textarea>
+        </div>
+      </div>
+      <button class="wal-submit" onclick="addWALEntry()">Add to log</button>
+    </div>
+
+    <!-- FILTER + ENTRIES -->
+    <div class="wal-filter">
+      <button class="wal-filter-btn active" onclick="filterWAL('all',this)">All subjects</button>
+      <button class="wal-filter-btn" onclick="filterWAL('english',this)">English</button>
+      <button class="wal-filter-btn" onclick="filterWAL('math',this)">Math</button>
+      <button class="wal-filter-btn" onclick="filterWAL('reading',this)">Reading</button>
+      <button class="wal-filter-btn" onclick="filterWAL('science',this)">Science</button>
+      <span class="wal-count" id="walCount"></span>
+    </div>
+
+    <div class="wal-entries" id="walEntries"></div>
+
+  </div>
+</div>
+
 <!-- PARENT TAB -->
 <div class="tab-content" id="tab-parent">
   <div class="main">
@@ -833,6 +1148,11 @@
           <tbody id="parentWeekBody"></tbody>
         </table>
       </div>
+    </div>
+
+    <div class="section-divider">Wrong answer log — her mistakes by subject</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.5rem;">
+      <div id="parentWAL"><p style="font-size:13px;color:var(--muted);">No wrong answers logged yet.</p></div>
     </div>
 
     <div class="section-divider">Score progress</div>
@@ -1576,6 +1896,7 @@ let state = {
   checks: {},
   scores: [],
   notes: "",
+  wrongLog: [],
   apiKey: "",
   binId: "",
   setupDismissed: false
@@ -1804,6 +2125,7 @@ function updateParentTab() {
 
   // Notes
   document.getElementById('parentNotes').value = state.notes || '';
+  renderParentWAL();
 }
 
 // ========== TASK TOGGLE ==========
@@ -1914,8 +2236,8 @@ function switchTab(tab) {
   document.getElementById('tab-' + tab).classList.add('active');
   event.target.classList.add('active');
   if (tab === 'parent') updateParentTab();
+  if (tab === 'wronglog') renderWAL();
   if (tab === 'student') {
-    // Refresh parent note display when returning to student tab
     if (state.notes && state.notes.trim()) {
       document.getElementById('studentParentNote').style.display = 'block';
       document.getElementById('studentNoteText').textContent = state.notes;
@@ -1987,6 +2309,112 @@ function resetTimer() {
   document.getElementById('timerRounds').textContent = 'Round 1 of 4';
   document.getElementById('timerStartBtn').textContent = 'Start';
   updateTimerDisplay();
+}
+
+// ========== WRONG ANSWER LOG ==========
+let walFilter = 'all';
+
+const SUBJECT_COLORS = {
+  english: { bg: 'var(--english-bg)', color: 'var(--english)' },
+  math:    { bg: 'var(--math-bg)',    color: 'var(--math)' },
+  reading: { bg: 'var(--reading-bg)', color: 'var(--reading)' },
+  science: { bg: 'var(--science-bg)', color: 'var(--science)' }
+};
+
+function addWALEntry() {
+  const subject = document.getElementById('wal-subject').value;
+  const concept = document.getElementById('wal-concept').value.trim();
+  const wrong   = document.getElementById('wal-wrong').value.trim();
+  const correct = document.getElementById('wal-correct').value.trim();
+  if (!subject || !concept || !wrong) {
+    alert('Please fill in at least Subject, Concept, and What went wrong.');
+    return;
+  }
+  const entry = {
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    subject, concept, wrong, correct
+  };
+  state.wrongLog.unshift(entry);
+  saveState();
+  renderWAL();
+  // Clear form
+  document.getElementById('wal-subject').value = '';
+  document.getElementById('wal-concept').value = '';
+  document.getElementById('wal-wrong').value = '';
+  document.getElementById('wal-correct').value = '';
+}
+
+function deleteWALEntry(id) {
+  state.wrongLog = state.wrongLog.filter(e => e.id !== id);
+  saveState();
+  renderWAL();
+  updateParentTab();
+}
+
+function filterWAL(subject, btn) {
+  walFilter = subject;
+  document.querySelectorAll('.wal-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderWAL();
+}
+
+function renderWAL() {
+  const container = document.getElementById('walEntries');
+  if (!container) return;
+  const filtered = walFilter === 'all'
+    ? state.wrongLog
+    : state.wrongLog.filter(e => e.subject === walFilter);
+  const countEl = document.getElementById('walCount');
+  if (countEl) countEl.textContent = `${filtered.length} entr${filtered.length === 1 ? 'y' : 'ies'}`;
+  if (!filtered.length) {
+    container.innerHTML = `<div class="wal-empty">No entries yet${walFilter !== 'all' ? ' for this subject' : ''}. Add your first wrong answer above.</div>`;
+    return;
+  }
+  container.innerHTML = filtered.map(e => {
+    const sc = SUBJECT_COLORS[e.subject] || { bg: 'var(--bg)', color: 'var(--muted)' };
+    return `<div class="wal-entry">
+      <span class="wal-entry-subject" style="background:${sc.bg};color:${sc.color}">${e.subject.toUpperCase()}</span>
+      <div class="wal-entry-body">
+        <div class="wal-entry-concept">${e.concept}</div>
+        <div class="wal-entry-lesson"><strong>What went wrong:</strong> ${e.wrong}</div>
+        ${e.correct ? `<div class="wal-entry-lesson" style="margin-top:4px"><strong>Correct approach:</strong> ${e.correct}</div>` : ''}
+        <div class="wal-entry-date">${e.date}</div>
+      </div>
+      <button class="wal-entry-delete" onclick="deleteWALEntry(${e.id})" title="Delete entry">×</button>
+    </div>`;
+  }).join('');
+}
+
+function renderParentWAL() {
+  const container = document.getElementById('parentWAL');
+  if (!container) return;
+  if (!state.wrongLog.length) {
+    container.innerHTML = '<p style="font-size:13px;color:var(--muted);">No wrong answers logged yet.</p>';
+    return;
+  }
+  // Group by subject
+  const grouped = {};
+  state.wrongLog.forEach(e => {
+    if (!grouped[e.subject]) grouped[e.subject] = [];
+    grouped[e.subject].push(e);
+  });
+  const subjectOrder = ['english', 'math', 'reading', 'science'];
+  container.innerHTML = subjectOrder.filter(s => grouped[s]).map(s => {
+    const sc = SUBJECT_COLORS[s];
+    const entries = grouped[s];
+    return `<div style="margin-bottom:1rem;">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:${sc.color};margin-bottom:6px;">
+        ${s} — ${entries.length} logged mistake${entries.length > 1 ? 's' : ''}
+      </div>
+      ${entries.slice(0, 5).map(e => `
+        <div style="background:${sc.bg};border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:5px;font-size:12px;">
+          <strong>${e.concept}</strong><br>
+          <span style="color:var(--muted)">${e.wrong}</span>
+        </div>`).join('')}
+      ${entries.length > 5 ? `<div style="font-size:11px;color:var(--muted);padding:4px 0;">+ ${entries.length - 5} more — view all in Wrong Answer Log tab</div>` : ''}
+    </div>`;
+  }).join('');
 }
 
 // ========== MOTIVATIONAL MESSAGES ==========
@@ -2077,6 +2505,7 @@ async function init() {
   renderWeek(currentWeek);
   updateProgress();
   updateTimerDisplay();
+  renderWAL();
 
   // Pick a daily motivational message based on day of year
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
