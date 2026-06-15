@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACT Study Plan — July 11</title>
+<style>
+  :root {
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --border: #E4E2DC;
+    --text: #1A1A18;
+    --muted: #6B6B66;
+    --hint: #A8A8A2;
+    --english: #1855A3;
+    --english-bg: #EAF1FC;
+    --math: #2D7A3A;
+    --math-bg: #E8F5EB;
+    --reading: #B25E0A;
+    --reading-bg: #FDF0E3;
+    --science: #6B3BBF;
+    --science-bg: #F0EBFC;
+    --full: #C0392B;
+    --full-bg: #FDECEA;
+    --rest: #2D7A3A;
+    --rest-bg: #E8F5EB;
+    --accent: #1855A3;
+    --success: #2D7A3A;
+    --warning: #B25E0A;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--text);
+    color: #fff;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-title { font-size: 15px; font-weight: 600; letter-spacing: 0.01em; }
+  .topbar-sub { font-size: 12px; opacity: 0.55; margin-top: 1px; }
+  .topbar-score {
+    font-size: 13px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    cursor: pointer;
+  }
+  .topbar-score:hover { background: rgba(255,255,255,0.18); }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+  /* WEEK NAVIGATION */
+  .week-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .week-nav-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+  .week-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .week-nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .week-label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* PROGRESS BAR */
+  .progress-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .progress-label { font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .progress-bar-wrap {
+    flex: 1;
+    min-width: 160px;
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .progress-pct { font-size: 14px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .progress-stats {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 13px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .progress-stats span { white-space: nowrap; }
+  .progress-stats strong { color: var(--text); }
+
+  /* DAYS GRID */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  /* DAY CARD */
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .day-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+  .day-card.today { border-color: var(--accent); }
+  .day-card.today .day-header { background: var(--accent); color: #fff; }
+  .day-card.completed-day { border-color: var(--success); }
+
+  .day-header {
+    padding: 10px 14px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .day-header-name { font-size: 13px; font-weight: 600; }
+  .day-header-date { font-size: 11px; opacity: 0.6; }
+  .day-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .badge-rest { background: #E8F5EB; color: #2D7A3A; }
+  .badge-test { background: #FDF0E3; color: #B25E0A; }
+  .badge-today { background: rgba(255,255,255,0.25); color: #fff; }
+
+  .day-body { padding: 12px 14px; }
+
+  /* TASK ITEM */
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--bg);
+  }
+  .task-item:last-child { border-bottom: none; }
+
+  .task-check {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.15s;
+    background: var(--surface);
+  }
+  .task-check:hover { border-color: var(--accent); }
+  .task-check.checked {
+    background: var(--success);
+    border-color: var(--success);
+  }
+  .task-check.checked::after {
+    content: '✓';
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .task-content { flex: 1; min-width: 0; }
+  .task-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 8px;
+    margin-right: 5px;
+    letter-spacing: 0.03em;
+    vertical-align: middle;
+  }
+  .tag-english { background: var(--english-bg); color: var(--english); }
+  .tag-math { background: var(--math-bg); color: var(--math); }
+  .tag-reading { background: var(--reading-bg); color: var(--reading); }
+  .tag-science { background: var(--science-bg); color: var(--science); }
+  .tag-full { background: var(--full-bg); color: var(--full); }
+  .tag-rest { background: var(--rest-bg); color: var(--rest); }
+
+  .task-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+    vertical-align: middle;
+  }
+  .task-text.done { text-decoration: line-through; color: var(--hint); }
+
+  .task-link {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 2px;
+  }
+  .task-link:hover { text-decoration: underline; }
+
+  .day-complete-bar {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--bg);
+    font-size: 11px;
+    color: var(--hint);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mini-bar {
+    width: 80px;
+    height: 4px;
+    background: var(--bg);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .mini-bar-fill {
+    height: 100%;
+    background: var(--success);
+    border-radius: 2px;
+    transition: width 0.3s;
+  }
+
+  /* POMODORO TIMER */
+  .timer-widget {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .timer-display {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    min-width: 120px;
+  }
+  .timer-display.running { color: var(--accent); }
+  .timer-display.break-time { color: var(--success); }
+  .timer-info { flex: 1; min-width: 180px; }
+  .timer-mode { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+  .timer-message { font-size: 13px; color: var(--muted); }
+  .timer-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+  .timer-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .timer-btn:hover { background: var(--bg); }
+  .timer-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .timer-btn.primary:hover { opacity: 0.88; }
+  .timer-rounds { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  /* SCORE TRACKER */
+  .score-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-modal-overlay.open { display: flex; }
+  .score-modal {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 2rem;
+    width: 480px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .score-modal h3 { font-size: 17px; font-weight: 600; margin-bottom: 1.25rem; }
+  .score-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+  .score-input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+  .score-input-group input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg);
+  }
+  .score-input-group input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  .composite-display {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .composite-num { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .composite-label { font-size: 12px; color: var(--muted); }
+  .composite-gap { font-size: 13px; color: var(--muted); }
+  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
+  .modal-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .modal-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* SCORE HISTORY */
+  .score-history { margin-top: 1.5rem; }
+  .score-history h4 { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+  .score-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 80px 80px 80px 80px;
+    gap: 8px;
+    font-size: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--bg);
+    align-items: center;
+  }
+  .score-row.header { font-weight: 600; color: var(--muted); font-size: 11px; }
+  .score-row .composite-cell { font-weight: 700; font-size: 14px; }
+
+  /* PARENT TAB */
+  .parent-section { margin-bottom: 2rem; }
+  .parent-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 1rem; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+  .summary-card-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .summary-card-value { font-size: 26px; font-weight: 700; color: var(--text); }
+  .summary-card-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .week-summary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .week-summary-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+  .week-summary-table td { padding: 10px 12px; border-bottom: 1px solid var(--bg); }
+  .week-summary-table tr:last-child td { border-bottom: none; }
+
+  /* RESOURCE SECTION */
+  .resources-section { margin-top: 0.5rem; }
+  .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .resource-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+  .resource-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .resource-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--bg);
+  }
+  .resource-link:last-child { border-bottom: none; }
+  .resource-link:hover { text-decoration: underline; }
+  .resource-link-desc { font-size: 11px; color: var(--muted); display: block; }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 2rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* NOTES */
+  .notes-area {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--surface);
+    resize: vertical;
+  }
+  .notes-area:focus { outline: 2px solid var(--accent); border-color: transparent; }
+
+  /* SAVE STATUS */
+  .save-status {
+    font-size: 11px;
+    color: var(--hint);
+    text-align: right;
+    margin-top: 4px;
+  }
+  .save-status.saved { color: var(--success); }
+  .save-status.saving { color: var(--warning); }
+  .save-status.error { color: var(--full); }
+
+  /* CLOUD SETUP */
+  .setup-banner {
+    background: #EAF1FC;
+    border: 1px solid #B5D4F4;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .setup-banner.hidden { display: none; }
+  .setup-banner-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .setup-banner h4 { font-size: 14px; font-weight: 600; color: var(--english); margin-bottom: 4px; }
+  .setup-banner p { font-size: 13px; color: #1855A3; line-height: 1.5; }
+  .setup-banner input {
+    margin-top: 8px;
+    width: 100%;
+    max-width: 320px;
+    padding: 7px 10px;
+    border: 1px solid #B5D4F4;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    display: block;
+  }
+  .setup-banner button {
+    margin-top: 8px;
+    padding: 6px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* MOTIVATIONAL BANNER */
+  .motiv-banner {
+    border-radius: var(--radius);
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .motiv-emoji { font-size: 26px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+  .motiv-body { flex: 1; }
+  .motiv-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; opacity: 0.65; }
+  .motiv-quote { font-size: 15px; font-weight: 500; line-height: 1.5; margin-bottom: 6px; }
+  .motiv-sub { font-size: 12px; opacity: 0.72; line-height: 1.5; }
+  .motiv-nav { display: flex; gap: 6px; margin-top: 10px; }
+  .motiv-nav button {
+    font-size: 11px; padding: 3px 10px; border-radius: 12px;
+    border: 1px solid currentColor; background: transparent;
+    cursor: pointer; opacity: 0.7; font-weight: 500;
+  }
+  .motiv-nav button:hover { opacity: 1; }
+  .motiv-parent-note {
+    margin-top: 10px; padding: 8px 10px;
+    background: rgba(255,255,255,0.5); border-radius: var(--radius-sm);
+    font-size: 12px; font-style: italic;
+    display: none;
+  }
+  .motiv-parent-note.visible { display: block; }
+
+  /* PARENT PRACTICE TAB */
+  .practice-subject-tabs { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .practice-subject-btn {
+    padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border);
+    font-size: 13px; font-weight: 500; cursor: pointer; background: var(--surface);
+    color: var(--muted); transition: all 0.15s;
+  }
+  .practice-subject-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .practice-subject-btn.active { color: #fff; border-color: transparent; }
+  .practice-subject-btn.english.active { background: var(--english); }
+  .practice-subject-btn.reading.active { background: var(--reading); }
+  .practice-subject-btn.science.active { background: var(--science); }
+
+  .practice-panel { display: none; }
+  .practice-panel.active { display: block; }
+
+  .concept-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;
+  }
+  .concept-header {
+    padding: 12px 16px; display: flex; align-items: center;
+    justify-content: space-between; cursor: pointer; user-select: none;
+  }
+  .concept-header:hover { background: var(--bg); }
+  .concept-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+  .concept-score {
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    font-weight: 600;
+  }
+  .score-low { background: #FDECEA; color: var(--full); }
+  .score-mid { background: #FDF0E3; color: var(--warning); }
+  .score-ok { background: var(--math-bg); color: var(--math); }
+  .concept-toggle { font-size: 18px; color: var(--muted); transition: transform 0.2s; }
+  .concept-toggle.open { transform: rotate(180deg); }
+  .concept-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--bg); }
+  .concept-body.open { display: block; }
+
+  .teach-section { margin-top: 12px; }
+  .teach-section h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 8px; }
+  .teach-tip {
+    background: var(--bg); border-radius: var(--radius-sm);
+    padding: 10px 12px; margin-bottom: 8px; font-size: 13px; line-height: 1.55;
+  }
+  .teach-tip strong { color: var(--text); }
+  .teach-example {
+    background: #F0EBFC; border-left: 3px solid var(--science);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 12px; margin: 8px 0; font-size: 13px; line-height: 1.55;
+    font-style: italic;
+  }
+  .teach-example.english-ex { background: var(--english-bg); border-color: var(--english); }
+  .teach-example.reading-ex { background: var(--reading-bg); border-color: var(--reading); }
+  .reteach-box {
+    background: #FFF8E7; border: 1px solid #F5D87A;
+    border-radius: var(--radius-sm); padding: 10px 12px;
+    margin-top: 10px; font-size: 13px; line-height: 1.55;
+  }
+  .reteach-box h5 { color: #7A5800; margin-bottom: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; }
+  .practice-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .practice-link-btn {
+    font-size: 12px; padding: 5px 12px; border-radius: 14px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--accent); text-decoration: none; display: inline-block;
+    transition: all 0.15s;
+  }
+  .practice-link-btn:hover { background: var(--english-bg); border-color: var(--english); }
+
+  .parent-note-display {
+    background: #FFF8E7; border: 1px solid #F5D87A;
+    border-radius: var(--radius); padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem; font-size: 14px; line-height: 1.6;
+    display: none;
+  }
+  .parent-note-display.visible { display: block; }
+  .parent-note-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #7A5800; margin-bottom: 6px; }
+
+  /* HIDDEN */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  @media (max-width: 600px) {
+    .main { padding: 1rem; }
+    .topbar { padding: 0 1rem; }
+    .timer-display { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">ACT Study Plan</div>
+    <div class="topbar-sub">Test day: Friday, July 11 &nbsp;·&nbsp; Target: 24 composite</div>
+  </div>
+  <button class="topbar-score" onclick="openScoreModal()">+ Log practice score</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('student')">📚 Student</button>
+  <button class="tab-btn" onclick="switchTab('parent')">👨‍👩‍👧 Parent</button>
+  <button class="tab-btn" onclick="switchTab('practice')">🎯 Parent Practice</button>
+  <button class="tab-btn" onclick="switchTab('resources')">🔗 Resources</button>
+</div>
+
+<!-- SCORE MODAL -->
+<div class="score-modal-overlay" id="scoreModal">
+  <div class="score-modal">
+    <h3>Log a practice test score</h3>
+    <div class="score-inputs">
+      <div class="score-input-group">
+        <label>English (max 36)</label>
+        <input type="number" id="inp-english" min="1" max="36" placeholder="—" oninput="calcComposite()">
+      </div>
+      <div class="score-input-group">
+        <label>Math (max 36)</label>
+        <input type="number" id="inp-math" min="1" max="36" placeholder="—" oninput="calcComposite()">
+      </div>
+      <div class="score-input-group">
+        <label>Reading (max 36)</label>
+        <input type="number" id="inp-reading" min="1" max="36" placeholder="—" oninput="calcComposite()">
+      </div>
+      <div class="score-input-group">
+        <label>Science (max 36)</label>
+        <input type="number" id="inp-science" min="1" max="36" placeholder="—" oninput="calcComposite()">
+      </div>
+    </div>
+    <div class="composite-display">
+      <div>
+        <div class="composite-label">Composite score</div>
+        <div class="composite-num" id="composite-display">—</div>
+      </div>
+      <div class="composite-gap" id="composite-gap"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn" onclick="closeScoreModal()">Cancel</button>
+      <button class="modal-btn primary" onclick="saveScore()">Save score</button>
+    </div>
+    <div class="score-history" id="scoreHistory"></div>
+  </div>
+</div>
+
+<!-- STUDENT TAB -->
+<div class="tab-content active" id="tab-student">
+  <div class="main">
+
+    <!-- PARENT NOTE TO STUDENT -->
+    <div class="parent-note-display" id="studentParentNote">
+      <div class="parent-note-label">📝 Note from mom/dad</div>
+      <div id="studentNoteText"></div>
+    </div>
+
+    <!-- MOTIVATIONAL BANNER -->
+    <div class="motiv-banner" id="motivBanner">
+      <div class="motiv-emoji" id="motivEmoji">💪</div>
+      <div class="motiv-body">
+        <div class="motiv-label">Daily motivation</div>
+        <div class="motiv-quote" id="motivQuote"></div>
+        <div class="motiv-sub" id="motivSub"></div>
+        <div class="motiv-nav">
+          <button onclick="prevMotiv()">← Previous</button>
+          <button onclick="nextMotiv()">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOUD SETUP BANNER -->
+    <div class="setup-banner" id="setupBanner">
+      <div class="setup-banner-icon">☁️</div>
+      <div style="flex:1">
+        <h4>Set up cloud saving to sync across devices</h4>
+        <p>Your progress saves automatically in this browser. To sync across devices, get a free API key from <a href="https://jsonbin.io" target="_blank" style="color:var(--english)">JSONBin.io</a> (free account, no credit card). Paste it below and progress will sync everywhere.</p>
+        <input type="text" id="apiKeyInput" placeholder="Paste your JSONBin API key here..." />
+        <button onclick="saveApiKey()">Connect cloud saving</button>
+        <p style="margin-top:6px;font-size:11px;opacity:0.7">Or dismiss this to use local browser saving only — your progress stays on this device.</p>
+        <button onclick="dismissSetup()" style="background:transparent;color:var(--english);border:1px solid var(--english);margin-top:4px;">Use local saving only</button>
+      </div>
+    </div>
+
+    <!-- POMODORO TIMER -->
+    <div class="timer-widget">
+      <div class="timer-display" id="timerDisplay">25:00</div>
+      <div class="timer-info">
+        <div class="timer-mode" id="timerMode">Focus session</div>
+        <div class="timer-message" id="timerMessage">Start a 25-minute study block</div>
+        <div class="timer-rounds" id="timerRounds">Round 1 of 4</div>
+      </div>
+      <div class="timer-controls">
+        <button class="timer-btn primary" id="timerStartBtn" onclick="toggleTimer()">Start</button>
+        <button class="timer-btn" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+
+    <!-- OVERALL PROGRESS -->
+    <div class="progress-section">
+      <div class="progress-label">Overall progress</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="overallProgressBar" style="width:0%"></div>
+      </div>
+      <div class="progress-pct" id="overallProgressPct">0%</div>
+      <div class="progress-stats">
+        <span><strong id="totalDone">0</strong> tasks done</span>
+        <span><strong id="totalLeft">0</strong> remaining</span>
+        <span><strong id="daysLeft">0</strong> days to test</span>
+      </div>
+    </div>
+
+    <!-- WEEK NAV -->
+    <div class="week-nav">
+      <button class="week-nav-btn active" onclick="showWeek(0,this)">Week 1</button>
+      <button class="week-nav-btn" onclick="showWeek(1,this)">Week 2</button>
+      <button class="week-nav-btn" onclick="showWeek(2,this)">Week 3</button>
+      <button class="week-nav-btn" onclick="showWeek(3,this)">Week 4</button>
+      <div class="week-label" id="weekLabel">June 16 – June 22</div>
+    </div>
+
+    <!-- DAY CARDS -->
+    <div class="days-grid" id="daysGrid"></div>
+
+  </div>
+</div>
+
+<!-- PARENT TAB -->
+<div class="tab-content" id="tab-parent">
+  <div class="main">
+    <div class="parent-section">
+      <h3>Progress overview</h3>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-card-label">Tasks completed</div>
+          <div class="summary-card-value" id="parent-done">0</div>
+          <div class="summary-card-sub" id="parent-done-sub">of 0 total</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">Current superscore</div>
+          <div class="summary-card-value" id="parent-superscore">18</div>
+          <div class="summary-card-sub">Target: 24</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">Best practice composite</div>
+          <div class="summary-card-value" id="parent-best">—</div>
+          <div class="summary-card-sub">From logged tests</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">Days to test</div>
+          <div class="summary-card-value" id="parent-days">—</div>
+          <div class="summary-card-sub">July 11, 2026</div>
+        </div>
+      </div>
+
+      <div class="section-divider">Weekly breakdown</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+        <table class="week-summary-table" id="parentWeekTable">
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Tasks done</th>
+              <th>Total tasks</th>
+              <th>Completion</th>
+              <th>Focus</th>
+            </tr>
+          </thead>
+          <tbody id="parentWeekBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-divider">Score progress</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem;">
+      <div class="score-history" id="parentScoreHistory" style="padding:1rem 1.25rem;">
+        <p style="font-size:13px;color:var(--muted);">No scores logged yet. Use "Log practice score" to track test results.</p>
+      </div>
+    </div>
+
+    <div class="section-divider">Daily notes for her</div>
+    <textarea class="notes-area" id="parentNotes" placeholder="Leave a note, encouragement, or reminder for tomorrow..." oninput="saveNotes()"></textarea>
+    <div class="save-status" id="notesSaveStatus">Notes save automatically</div>
+  </div>
+</div>
+
+<!-- PARENT PRACTICE TAB -->
+<div class="tab-content" id="tab-practice">
+  <div class="main">
+
+    <div style="background:var(--english-bg);border:1px solid #B5D4F4;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:13px;color:var(--english);line-height:1.6;">
+        <strong>How to use this tab:</strong> Work through the same exercises your daughter is doing — one subject at a time. Each concept shows her score from the real test, explains what the ACT actually tests, gives you a practice approach, and tells you exactly how to re-teach it if she keeps getting it wrong. For Math, let <em>her</em> teach <em>you</em> — if she can explain it clearly, she's got it. If she stumbles, you've found the gap.
+      </div>
+    </div>
+
+    <!-- SUBJECT TABS -->
+    <div class="practice-subject-tabs">
+      <button class="practice-subject-btn english active" onclick="showPracticeSubject('english',this)">English</button>
+      <button class="practice-subject-btn reading" onclick="showPracticeSubject('reading',this)">Reading</button>
+      <button class="practice-subject-btn science" onclick="showPracticeSubject('science',this)">Science</button>
+      <button class="practice-subject-btn" style="border-color:var(--math-bg);color:var(--math)" onclick="showPracticeSubject('math',this)" id="mathSubjectBtn">Math (she teaches you!)</button>
+    </div>
+
+    <!-- ENGLISH PANEL -->
+    <div class="practice-panel active" id="panel-english">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;">Her English superscore: <strong style="color:var(--english)">16/36</strong> &nbsp;·&nbsp; Target: 22 &nbsp;·&nbsp; 75 questions, 45 min (extended time ~67 min)</div>
+
+      <!-- CONVENTIONS -->
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('eng1')">
+          <div class="concept-title">
+            <span>Conventions of Standard English</span>
+            <span class="concept-score score-low">24% on her test</span>
+          </div>
+          <div class="concept-toggle" id="eng1-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="eng1-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Punctuation (commas, semicolons, colons, apostrophes), sentence structure (run-ons, fragments, parallel structure), subject-verb agreement, pronoun agreement, and verb tense consistency. These are the most mechanical, rule-based questions on the whole test — and the most learnable.</div>
+          </div>
+          <div class="teach-section">
+            <h5>The most common traps (she likely missed these)</h5>
+            <div class="teach-tip"><strong>Comma splices:</strong> Two complete sentences joined with just a comma. The ACT loves making students pick between a comma, semicolon, or period. Rule: a semicolon can replace a period; a comma alone cannot join two full sentences.</div>
+            <div class="teach-example english-ex">Wrong: "She studied hard, she passed the test."<br>Right: "She studied hard; she passed the test." or "She studied hard, and she passed the test."</div>
+            <div class="teach-tip"><strong>Apostrophes:</strong> Its vs. It's. Their vs. They're. Possessive pronouns never use apostrophes — only contractions do.</div>
+            <div class="teach-tip"><strong>Subject-verb agreement with tricky middles:</strong> "The box of chocolates [is/are] on the table." The verb agrees with "box" (singular), not "chocolates."</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Ask her to read the sentence aloud and stop at every punctuation mark. Does it feel like a full stop? Then it probably needs a period or semicolon, not a comma. For apostrophes, drill the single rule: possessive pronouns (its, their, your, whose) NEVER have apostrophes. Write them on a sticky note on her laptop.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://blog.prepscholar.com/act-grammar-rules" target="_blank">PrepScholar grammar rules ↗</a>
+            <a class="practice-link-btn" href="https://www.khanacademy.org/test-prep/act/act-english" target="_blank">Khan Academy English ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KNOWLEDGE OF LANGUAGE -->
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('eng2')">
+          <div class="concept-title">
+            <span>Knowledge of Language</span>
+            <span class="concept-score score-low">29% on her test</span>
+          </div>
+          <div class="concept-toggle" id="eng2-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="eng2-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Word choice (precision, conciseness), style (avoiding redundancy), and transitions between ideas. The ACT loves testing whether you can cut unnecessary words — shorter is almost always correct when meaning is preserved.</div>
+          </div>
+          <div class="teach-section">
+            <h5>The golden rule: shortest answer that preserves meaning</h5>
+            <div class="teach-example english-ex">Wrong: "Due to the fact that she was tired, she went to bed early."<br>Right: "Because she was tired, she went to bed early."</div>
+            <div class="teach-tip"><strong>Redundancy trap:</strong> Watch for answers that say the same thing twice. "End result," "past history," "future plans" — the ACT will offer these as wrong answers. The correct choice cuts the redundant word.</div>
+            <div class="teach-tip"><strong>Transitions:</strong> "However," "Therefore," "Furthermore," "For example" — know what each one signals (contrast, conclusion, addition, example). The ACT asks you to pick the right transition word for the relationship between two sentences.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Play a game: give her a wordy sentence and ask her to cut it in half without losing meaning. This is actually a great Graphic Design parallel — you know that good design removes everything unnecessary. Same rule applies here. Less is more.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://blog.prepscholar.com/act-english-tips" target="_blank">PrepScholar English tips ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTION OF WRITING -->
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('eng3')">
+          <div class="concept-title">
+            <span>Production of Writing (Rhetorical Skills)</span>
+            <span class="concept-score score-mid">63% on her test — her strongest!</span>
+          </div>
+          <div class="concept-toggle" id="eng3-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="eng3-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Organization, relevance, and purpose. Questions like "Should this sentence be added or deleted?", "Which sentence best introduces this paragraph?", "Does this sentence support the author's argument?" These are judgment calls about writing quality, not grammar rules.</div>
+          </div>
+          <div class="teach-section">
+            <h5>Key strategies</h5>
+            <div class="teach-tip"><strong>Always read the question first</strong> — rhetorical questions always tell you what to look for. "Which sentence best supports the paragraph's main idea?" means you need to understand the paragraph's main idea before you can answer.</div>
+            <div class="teach-tip"><strong>Deletion questions:</strong> If a sentence adds new, unrelated information, delete it. If it supports or clarifies the paragraph's point, keep it.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            This is her strongest area — protect it. If she misses one, ask her to explain the paragraph's main idea in one sentence first, then re-read the question. Usually the answer becomes obvious once the main idea is clear.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- READING PANEL -->
+    <div class="practice-panel" id="panel-reading">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;">Her Reading superscore: <strong style="color:var(--reading)">20/36</strong> &nbsp;·&nbsp; Target: 25 &nbsp;·&nbsp; 4 passages, 40 questions, 35 min (extended ~52 min) &nbsp;·&nbsp; <strong>Most inconsistent section — dropped from 20 to 15 between tests</strong></div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('read1')">
+          <div class="concept-title">
+            <span>Key Ideas and Details</span>
+            <span class="concept-score score-mid">50% on her best test</span>
+          </div>
+          <div class="concept-toggle" id="read1-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="read1-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Main idea questions, detail questions ("According to the passage..."), and inference questions ("The author implies..."). This is the largest category — 12 of 40 questions.</div>
+          </div>
+          <div class="teach-section">
+            <h5>The passage approach that works</h5>
+            <div class="teach-tip"><strong>Step 1 — Preview questions first:</strong> Skim ALL 10 questions before reading a word of the passage. Circle any that reference a specific line or detail.</div>
+            <div class="teach-tip"><strong>Step 2 — Read actively:</strong> Underline the topic sentence of each paragraph. After each paragraph, ask "what was that about?" in one phrase.</div>
+            <div class="teach-tip"><strong>Step 3 — Answer as you go:</strong> If a question references lines 12-15, go straight there — don't re-read the whole passage.</div>
+            <div class="teach-example reading-ex">For "According to the passage..." questions — the answer is always directly stated somewhere. Never use outside knowledge. Find the line, point to the answer.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Her big drop (20→15) is almost certainly a focus issue, not a knowledge issue. Practice this: after each paragraph she reads, she must say aloud what it was about before moving on. This keeps her anchored and fights the ADHD drift. Her extended time makes this very doable.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://blog.prepscholar.com/how-to-improve-your-act-reading-score-tips" target="_blank">PrepScholar Reading guide ↗</a>
+            <a class="practice-link-btn" href="https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" target="_blank">Official ACT practice ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('read2')">
+          <div class="concept-title">
+            <span>Craft and Structure</span>
+            <span class="concept-score score-mid">50% on her best test</span>
+          </div>
+          <div class="concept-toggle" id="read2-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="read2-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Author's purpose ("Why does the author include..."), word meaning in context ("As used in line 14, 'charged' most nearly means..."), and point of view. These require understanding WHY something was written, not just WHAT it says.</div>
+          </div>
+          <div class="teach-section">
+            <h5>Vocabulary in context — the big trick</h5>
+            <div class="teach-example reading-ex">"As used in line 22, 'green' most nearly means..." — the answer is almost never the most common meaning of the word. Always go back to the line and read 2 sentences before and after to understand context.</div>
+            <div class="teach-tip"><strong>Author's purpose questions:</strong> Ask "why would a writer include this?" Usually the answer is: to support an argument, to give a counterexample, to provide evidence, or to introduce a contrast.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            For vocab-in-context: cover the answer choices, read the sentence with the word removed, and fill in your own word. Then find the answer that matches your word. This prevents her from being tricked by the obvious meaning.
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('read3')">
+          <div class="concept-title">
+            <span>Integration of Knowledge and Ideas</span>
+            <span class="concept-score score-ok">57% on her best test — good foundation!</span>
+          </div>
+          <div class="concept-toggle" id="read3-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="read3-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Comparing multiple sources, evaluating evidence, identifying how an argument is structured. The paired-passage question (two related passages) falls here — students must compare authors' viewpoints.</div>
+          </div>
+          <div class="teach-section">
+            <h5>Paired passage strategy</h5>
+            <div class="teach-tip">Read Passage A, answer Passage A questions. Read Passage B, answer Passage B questions. Then answer the comparison questions. Never try to hold both passages in memory at once.</div>
+            <div class="teach-tip"><strong>Comparison questions:</strong> "Both authors would agree that..." — find something both passages actually say, not something you think both authors believe.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Have her physically write "A says: ___" and "B says: ___" before answering comparison questions. This forces her to anchor her answer in the text and not drift into assumptions.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCIENCE PANEL -->
+    <div class="practice-panel" id="panel-science">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;">Her Science superscore: <strong style="color:var(--science)">19/36</strong> &nbsp;·&nbsp; Target: 27 &nbsp;·&nbsp; 6 passages, 40 questions, 35 min (extended ~52 min) &nbsp;·&nbsp; <strong>This is NOT a science knowledge test — it's reading comprehension with graphs</strong></div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('sci1')">
+          <div class="concept-title">
+            <span>Interpretation of Data (graphs & tables)</span>
+            <span class="concept-score score-mid">50% on her test</span>
+          </div>
+          <div class="concept-toggle" id="sci1-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="sci1-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Reading values from graphs, identifying trends (as X increases, Y...), comparing data between figures, and interpolating/extrapolating values. Most questions send you directly to a specific figure — this is a lookup task, not a thinking task.</div>
+          </div>
+          <div class="teach-section">
+            <h5>The approach — figures first, always</h5>
+            <div class="teach-tip"><strong>Step 1:</strong> Scan figure titles and axis labels BEFORE reading the passage text. Know what each graph measures.</div>
+            <div class="teach-tip"><strong>Step 2:</strong> Read the question, find which figure it references, go straight there.</div>
+            <div class="teach-tip"><strong>Step 3:</strong> Trace the value with your finger (or pencil on paper). Don't estimate — be precise.</div>
+            <div class="teach-example">Trend questions: "As temperature increases, the reaction rate..." — look at whether the line goes up, down, or stays flat. That IS the answer.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Practice graph reading with ANY graph — news articles, weather charts, anything. Ask "what's the x-axis? What's the y-axis? What happens to Y when X doubles?" This builds the reflex of reading axes before anything else.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://analyze-ed.com/improve-act-science-score.html" target="_blank">Analyze Ed: Science strategies ↗</a>
+            <a class="practice-link-btn" href="https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" target="_blank">Official ACT Science practice ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('sci2')">
+          <div class="concept-title">
+            <span>Scientific Investigation (experiments)</span>
+            <span class="concept-score score-low">25% on her test — biggest Science gap</span>
+          </div>
+          <div class="concept-toggle" id="sci2-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="sci2-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">Understanding experimental design — what is being tested (independent variable), what is being measured (dependent variable), what stays the same (control), and what would make the experiment better. This is her lowest Science subscore and a huge opportunity.</div>
+          </div>
+          <div class="teach-section">
+            <h5>The three things every experiment has</h5>
+            <div class="teach-tip"><strong>Independent variable:</strong> What the scientist changes on purpose. "In Experiment 1, the temperature was varied from 20°C to 80°C" — temperature is independent.</div>
+            <div class="teach-tip"><strong>Dependent variable:</strong> What gets measured as a result. Usually what's on the Y-axis of the graph.</div>
+            <div class="teach-tip"><strong>Control:</strong> What stays the same to make the test fair. "All other conditions were held constant."</div>
+            <div class="teach-example">Question: "What was the independent variable in Experiment 2?" → Look for what the scientists deliberately changed. It's always stated in the setup paragraph.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Use the "CSI method" — have her label every experiment: C (control), I (independent variable), D (dependent variable) before answering any questions. Takes 20 seconds and eliminates most mistakes. Make it a habit she does automatically.
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('sci3')">
+          <div class="concept-title">
+            <span>Evaluation of Models & Conflicting Viewpoints</span>
+            <span class="concept-score score-mid">40% on her test</span>
+          </div>
+          <div class="concept-toggle" id="sci3-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="sci3-body">
+          <div class="teach-section">
+            <h5>What the ACT actually tests here</h5>
+            <div class="teach-tip">The "Conflicting Viewpoints" passage is unique — it's the only passage that requires reading the text carefully (like Reading). Two or three scientists present different explanations for the same phenomenon. You have to understand what each scientist believes and how they differ.</div>
+          </div>
+          <div class="teach-section">
+            <h5>The key difference from other Science passages</h5>
+            <div class="teach-tip">For all other Science passages: figures first, text second. For Conflicting Viewpoints: read the text fully, then answer questions. The figures (if any) are secondary.</div>
+            <div class="teach-tip"><strong>Make a quick chart:</strong> "Scientist 1 believes ___ because ___. Scientist 2 believes ___ because ___." Questions will ask which viewpoint is supported by a new piece of evidence.</div>
+            <div class="teach-example">New evidence question: "A study finds that X increases with Y. This finding most supports..." → Go to your chart. Which scientist predicted that relationship?</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            Have her read a Conflicting Viewpoints passage and summarize each scientist's view in one sentence before touching the questions. If she can do that clearly, she'll get most of the questions right. Save these passages for last during the actual test — they take the most reading time.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATH PANEL -->
+    <div class="practice-panel" id="panel-math">
+      <div style="background:#EAF3DE;border:1px solid #B5D9BE;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem;">
+        <div style="font-size:13px;color:var(--math);line-height:1.6;">
+          <strong>🎓 The Feynman Technique in action:</strong> For each concept below, have her explain it to you like you're a student who's never seen it. If she gets stuck or the explanation doesn't make sense, you've both just found a gap that needs more tutor time. No pressure — it's actually fun, and it works.
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;">Her Math superscore: <strong style="color:var(--math)">17/36</strong> &nbsp;·&nbsp; Target: 22 &nbsp;·&nbsp; 60 questions, 60 min (extended ~90 min)</div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('math1')">
+          <div class="concept-title">
+            <span>Statistics & Probability</span>
+            <span class="concept-score score-low">0% on BOTH tests — top priority</span>
+          </div>
+          <div class="concept-toggle" id="math1-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="math1-body">
+          <div class="teach-section">
+            <h5>What she needs to be able to explain to you</h5>
+            <div class="teach-tip"><strong>Mean, median, mode:</strong> Mean = average (add all, divide by count). Median = middle value when sorted. Mode = most frequent value. Ask her: "If I have scores of 70, 85, 90, 90, 100 — what's the mean? The median? The mode?"</div>
+            <div class="teach-tip"><strong>Probability:</strong> Probability = favorable outcomes ÷ total outcomes. Ask her: "If I pull a card from a deck of 52, what's the probability of getting a heart?" (13/52 = 1/4)</div>
+            <div class="teach-tip"><strong>Probability of two events:</strong> "AND" = multiply. "OR" = add (and subtract overlap). Ask her to explain this with a coin flip example.</div>
+            <div class="teach-example" style="background:var(--math-bg);border-color:var(--math)">You ask: "I roll a die twice. What's the probability of getting a 6 both times?" She should say: 1/6 × 1/6 = 1/36. If she can't — more tutor work needed here.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 Signs she needs more tutor time on this</h5>
+            If she can't explain mean vs. median clearly, or confuses "AND" vs. "OR" probability — flag this for the tutor immediately. These 6 questions (0% right = 6 wrong) are the single biggest quick-win on the whole test.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy: Statistics ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('math2')">
+          <div class="concept-title">
+            <span>Algebra & Expressions</span>
+            <span class="concept-score score-low">25% on her test</span>
+          </div>
+          <div class="concept-toggle" id="math2-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="math2-body">
+          <div class="teach-section">
+            <h5>What she needs to be able to explain to you</h5>
+            <div class="teach-tip"><strong>Solving for x:</strong> Whatever you do to one side, do to the other. Ask her: "Solve 3x + 7 = 22." (x = 5)</div>
+            <div class="teach-tip"><strong>Systems of equations:</strong> Two equations, two unknowns. She should be able to solve by substitution or elimination. Ask her to walk you through one step by step.</div>
+            <div class="teach-tip"><strong>Factoring:</strong> x² + 5x + 6 = (x+2)(x+3). Ask her: "How do you know which numbers to use?" She should say: find two numbers that multiply to 6 and add to 5.</div>
+            <div class="teach-example" style="background:var(--math-bg);border-color:var(--math)">You ask: "If 2x - 3 = 11, what is x?" She should say: add 3 to both sides (2x = 14), then divide by 2 (x = 7). If she needs a calculator for this — more algebra drilling needed.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 Signs she needs more tutor time on this</h5>
+            If she can't factor a simple quadratic or gets confused with negative numbers in equations — flag for tutor. Note: her SAT algebra score improved, so she may be stronger here than the ACT score shows.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://www.khanacademy.org/math/algebra" target="_blank">Khan Academy: Algebra ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('math3')">
+          <div class="concept-title">
+            <span>Functions</span>
+            <span class="concept-score score-low">29% on her test</span>
+          </div>
+          <div class="concept-toggle" id="math3-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="math3-body">
+          <div class="teach-section">
+            <h5>What she needs to be able to explain to you</h5>
+            <div class="teach-tip"><strong>Function notation:</strong> f(x) means "plug x into the rule." Ask her: "If f(x) = 2x + 3, what is f(4)?" (Answer: 11)</div>
+            <div class="teach-tip"><strong>Reading graphs of functions:</strong> Where does the line cross the x-axis (zeros)? Where does it cross the y-axis (y-intercept)? Is it increasing or decreasing?</div>
+            <div class="teach-tip"><strong>Domain and range:</strong> Domain = all valid x values (inputs). Range = all valid y values (outputs). Ask her to explain using a simple graph.</div>
+            <div class="teach-example" style="background:var(--math-bg);border-color:var(--math)">You ask: "Draw me a function. Now tell me its domain and range." She should point to the x-axis spread for domain, y-axis spread for range. If she's confused — flag for tutor.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 Signs she needs more tutor time on this</h5>
+            If she can't evaluate f(x) for a given value or doesn't know what a y-intercept is — these are fundamental and need tutor attention before test day.
+          </div>
+          <div class="practice-links">
+            <a class="practice-link-btn" href="https://www.khanacademy.org/math/algebra2" target="_blank">Khan Academy: Functions ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('math4')">
+          <div class="concept-title">
+            <span>Geometry</span>
+            <span class="concept-score score-ok">86% on her test — her Math superpower!</span>
+          </div>
+          <div class="concept-toggle" id="math4-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="math4-body">
+          <div class="teach-section">
+            <h5>What the ACT tests here</h5>
+            <div class="teach-tip">Area and perimeter of shapes, angle relationships, the Pythagorean theorem, coordinate geometry (slope, distance, midpoint), and basic trig (SOH-CAH-TOA). She's already great at this — 86% is excellent.</div>
+          </div>
+          <div class="teach-section">
+            <h5>How to use this as a confidence builder</h5>
+            <div class="teach-tip">When she's feeling discouraged about Stats or Algebra, open a geometry problem set and let her crush it. Remind her: she's already mastered almost 7/8 geometry questions. She has real math ability — she just needs to extend it to other areas.</div>
+            <div class="teach-example" style="background:var(--math-bg);border-color:var(--math)">Ask her: "What's the area of a triangle with base 8 and height 5?" (20) "What's the hypotenuse of a right triangle with legs 3 and 4?" (5) She'll get these. Use it to boost her confidence before harder topics.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 Protect this score</h5>
+            Don't neglect geometry entirely even though she's good at it. 5 minutes of geometry practice a week keeps the skill sharp and gives her an easy confidence boost heading into test day.
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-card">
+        <div class="concept-header" onclick="toggleConcept('math5')">
+          <div class="concept-title">
+            <span>Modeling & Word Problems</span>
+            <span class="concept-score score-low">18–21% on her tests</span>
+          </div>
+          <div class="concept-toggle" id="math5-toggle">▼</div>
+        </div>
+        <div class="concept-body" id="math5-body">
+          <div class="teach-section">
+            <h5>What she needs to be able to explain to you</h5>
+            <div class="teach-tip"><strong>Setting up equations from word problems:</strong> This is the #1 skill. Ask her to read a word problem aloud and tell you what the variable represents before doing any math.</div>
+            <div class="teach-tip"><strong>Rate problems:</strong> Distance = Rate × Time. If a car travels 60 mph for 2.5 hours, how far? (150 miles) Ask her to set it up, not just solve it.</div>
+            <div class="teach-tip"><strong>Proportion and percent:</strong> "What is 35% of 80?" She should set up 0.35 × 80 = 28. "What percent of 50 is 12?" She should set up 12/50 × 100 = 24%.</div>
+            <div class="teach-example" style="background:var(--math-bg);border-color:var(--math)">You ask: "A shirt costs $40. It's on sale for 25% off. What's the sale price?" She should say: 40 × 0.25 = $10 off, so $30. If she reaches for a calculator before setting up the equation — that's the habit to fix.</div>
+          </div>
+          <div class="reteach-box">
+            <h5>🔁 If she keeps missing these — how to re-teach</h5>
+            The most common mistake is jumping to calculations before understanding what the question is asking. Teach her to write one sentence: "I am looking for ___." Then set up the equation. This slows the impulsive first-answer trap that ADHD brains fall into on word problems.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RESOURCES TAB -->
+<div class="tab-content" id="tab-resources">
+  <div class="main">
+    <div class="section-divider">English — grammar & writing</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4 style="color:var(--english)">Grammar rules (Conventions)</h4>
+        <a class="resource-link" href="https://blog.prepscholar.com/act-grammar-rules" target="_blank">PrepScholar: Complete ACT grammar rules <span class="resource-link-desc">The 12 rules tested most on ACT English</span></a>
+        <a class="resource-link" href="https://www.khanacademy.org/test-prep/act/act-english" target="_blank">Khan Academy: ACT English <span class="resource-link-desc">Free video lessons + practice questions</span></a>
+        <a class="resource-link" href="https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" target="_blank">Official ACT free practice <span class="resource-link-desc">Official questions from the test makers</span></a>
+      </div>
+      <div class="resource-card">
+        <h4 style="color:var(--english)">Knowledge of language</h4>
+        <a class="resource-link" href="https://blog.prepscholar.com/act-english-tips" target="_blank">PrepScholar: ACT English tips <span class="resource-link-desc">Word choice, tone, transitions</span></a>
+        <a class="resource-link" href="https://www.princetonreview.com/college-advice/act-english-tips" target="_blank">Princeton Review: English strategies <span class="resource-link-desc">Conciseness, redundancy, style</span></a>
+      </div>
+    </div>
+
+    <div class="section-divider">Math</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4 style="color:var(--math)">Statistics & Probability (0% — top priority)</h4>
+        <a class="resource-link" href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy: Statistics & Probability <span class="resource-link-desc">Start here — free and comprehensive</span></a>
+        <a class="resource-link" href="https://blog.prepscholar.com/act-math-formulas" target="_blank">PrepScholar: ACT math formulas <span class="resource-link-desc">Every formula you need to memorize</span></a>
+      </div>
+      <div class="resource-card">
+        <h4 style="color:var(--math)">Algebra & Functions</h4>
+        <a class="resource-link" href="https://www.khanacademy.org/math/algebra" target="_blank">Khan Academy: Algebra <span class="resource-link-desc">Linear equations, systems, expressions</span></a>
+        <a class="resource-link" href="https://www.khanacademy.org/math/algebra2" target="_blank">Khan Academy: Algebra 2 & Functions <span class="resource-link-desc">Functions, polynomials, graphing</span></a>
+        <a class="resource-link" href="https://blog.prepscholar.com/act-math-strategies" target="_blank">PrepScholar: ACT math strategies <span class="resource-link-desc">Plugging in, elimination, shortcuts</span></a>
+      </div>
+    </div>
+
+    <div class="section-divider">Reading</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4 style="color:var(--reading)">Passage strategies</h4>
+        <a class="resource-link" href="https://blog.prepscholar.com/how-to-improve-your-act-reading-score-tips" target="_blank">PrepScholar: How to improve Reading score <span class="resource-link-desc">Best guide for scores under 26</span></a>
+        <a class="resource-link" href="https://www.princetonreview.com/college-advice/act-reading-strategies" target="_blank">Princeton Review: Reading strategies <span class="resource-link-desc">Preview questions before reading</span></a>
+        <a class="resource-link" href="https://www.collegeessayguy.com/blog/raise-act-score-fast" target="_blank">College Essay Guy: Raise score fast <span class="resource-link-desc">Fastest techniques for improvement</span></a>
+      </div>
+    </div>
+
+    <div class="section-divider">Science</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4 style="color:var(--science)">Data & graphs (biggest upside)</h4>
+        <a class="resource-link" href="https://analyze-ed.com/improve-act-science-score.html" target="_blank">Analyze Ed: Science score improvement <span class="resource-link-desc">How to read charts, graphs, experiments</span></a>
+        <a class="resource-link" href="https://www.edisonos.com/act/act-science-tips-strategies" target="_blank">Edison OS: Science strategies <span class="resource-link-desc">Passage types, timing, conflicting viewpoints</span></a>
+        <a class="resource-link" href="https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" target="_blank">Official ACT Science practice <span class="resource-link-desc">Always use official materials</span></a>
+      </div>
+    </div>
+
+    <div class="section-divider">Full practice tests (most important)</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4>Official practice tests</h4>
+        <a class="resource-link" href="https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" target="_blank">ACT.org free practice tests <span class="resource-link-desc">Always use official materials — closest to real test</span></a>
+        <a class="resource-link" href="https://www.prepscholar.com/act/s/act-practice-tests" target="_blank">PrepScholar: Free ACT practice tests <span class="resource-link-desc">Realistic full-length tests with scoring</span></a>
+      </div>
+      <div class="resource-card">
+        <h4>Bright Futures info</h4>
+        <a class="resource-link" href="https://www.floridastudentfinancialaidsg.org/pdf/bfhandbookchapter1.pdf" target="_blank">Official Bright Futures handbook <span class="resource-link-desc">All eligibility rules — PDF from FDOE</span></a>
+        <a class="resource-link" href="https://score-smart.com/act-score-for-bright-futures/" target="_blank">ACT score requirements for Bright Futures <span class="resource-link-desc">24 for Medallion, 29 for Academic Scholars</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== DATA ==========
+const PLAN = [
+  {
+    week: 1,
+    label: "June 16 – June 22",
+    theme: "Learn strategies",
+    days: [
+      {
+        name: "Mon", date: "June 16", isoDate: "2026-06-16",
+        tasks: [
+          { tag: "english", text: "Read ACT grammar rules guide (PrepScholar)", link: "https://blog.prepscholar.com/act-grammar-rules" },
+          { tag: "english", text: "Practice 20 Conventions of Standard English questions", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "science", text: "Watch: how to read ACT graphs and tables", link: "https://analyze-ed.com/improve-act-science-score.html" },
+          { tag: "math", text: "Tell tutor to focus on Statistics & Probability (0% on last test)", link: "https://www.khanacademy.org/math/statistics-probability" }
+        ]
+      },
+      {
+        name: "Tue", date: "June 17", isoDate: "2026-06-17",
+        tasks: [
+          { tag: "english", text: "Practice 20 Conventions questions timed", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "science", text: "Complete 1 Data Representation passage set", link: "https://analyze-ed.com/improve-act-science-score.html" },
+          { tag: "math", text: "Tutor session — focus: Statistics & Probability", link: "https://www.khanacademy.org/math/statistics-probability" }
+        ]
+      },
+      {
+        name: "Wed", date: "June 18", isoDate: "2026-06-18",
+        tasks: [
+          { tag: "english", text: "Learn Knowledge of Language rules (transitions, word choice)", link: "https://blog.prepscholar.com/act-english-tips" },
+          { tag: "science", text: "Complete 1 Research Summary passage set", link: "https://www.edisonos.com/act/act-science-tips-strategies" },
+          { tag: "reading", text: "Practice: preview all questions BEFORE reading passage", link: "https://blog.prepscholar.com/how-to-improve-your-act-reading-score-tips" }
+        ]
+      },
+      {
+        name: "Thu", date: "June 19", isoDate: "2026-06-19",
+        tasks: [
+          { tag: "english", text: "Mixed English: 30 questions timed", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "science", text: "Conflicting Viewpoints passage — read fully, answer all", link: "https://www.edisonos.com/act/act-science-tips-strategies" },
+          { tag: "math", text: "Tutor session — focus: Algebra & Functions", link: "https://www.khanacademy.org/math/algebra" }
+        ]
+      },
+      {
+        name: "Fri", date: "June 20", isoDate: "2026-06-20",
+        tasks: [
+          { tag: "reading", text: "Full 4-passage Reading set (all 4 types)", link: "https://www.princetonreview.com/college-advice/act-reading-strategies" },
+          { tag: "english", text: "Review ALL wrong English answers from the week — write down the rule you missed", link: "https://blog.prepscholar.com/act-grammar-rules" },
+          { tag: "science", text: "Review ALL wrong Science answers — what type of question was it?", link: "https://analyze-ed.com/improve-act-science-score.html" }
+        ]
+      },
+      {
+        name: "Sat", date: "June 21", isoDate: "2026-06-21", badge: "light day",
+        tasks: [
+          { tag: "english", text: "15 grammar questions only — keep it light", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "rest", text: "Rest, move your body, get 9 hours sleep tonight" }
+        ]
+      },
+      {
+        name: "Sun", date: "June 22", isoDate: "2026-06-22", badge: "light day",
+        tasks: [
+          { tag: "reading", text: "1 Reading passage set — any type", link: "https://www.princetonreview.com/college-advice/act-reading-strategies" },
+          { tag: "rest", text: "Reflect: what was hardest this week? Tell mom/dad." }
+        ]
+      }
+    ]
+  },
+  {
+    week: 2,
+    label: "June 23 – June 29",
+    theme: "Build volume",
+    days: [
+      {
+        name: "Mon", date: "June 23", isoDate: "2026-06-23",
+        tasks: [
+          { tag: "reading", text: "Full reading set — focus: Literary Narrative & Social Science passages", link: "https://blog.prepscholar.com/how-to-improve-your-act-reading-score-tips" },
+          { tag: "english", text: "30 English questions timed", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "math", text: "Tutor session — Modeling & word problems", link: "https://blog.prepscholar.com/act-math-formulas" }
+        ]
+      },
+      {
+        name: "Tue", date: "June 24", isoDate: "2026-06-24",
+        tasks: [
+          { tag: "science", text: "2 Science sets — focus: Scientific Investigation passages", link: "https://www.edisonos.com/act/act-science-tips-strategies" },
+          { tag: "english", text: "Production of Writing questions (rhetorical skills)", link: "https://blog.prepscholar.com/act-english-tips" }
+        ]
+      },
+      {
+        name: "Wed", date: "June 25", isoDate: "2026-06-25",
+        tasks: [
+          { tag: "reading", text: "Full reading set — focus: Humanities & Natural Science passages", link: "https://www.princetonreview.com/college-advice/act-reading-strategies" },
+          { tag: "science", text: "1 Science set timed — try to beat last time", link: "https://analyze-ed.com/improve-act-science-score.html" },
+          { tag: "math", text: "Tutor session — Number & Quantity", link: "https://www.khanacademy.org/math/algebra2" }
+        ]
+      },
+      {
+        name: "Thu", date: "June 26", isoDate: "2026-06-26",
+        tasks: [
+          { tag: "english", text: "Full English section timed with extended time (75 questions)", link: "https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" },
+          { tag: "science", text: "Review all wrong answers — write down what type each was", link: "https://analyze-ed.com/improve-act-science-score.html" }
+        ]
+      },
+      {
+        name: "Fri", date: "June 27", isoDate: "2026-06-27",
+        tasks: [
+          { tag: "reading", text: "Full Reading section timed with extended time", link: "https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" },
+          { tag: "english", text: "Review wrong answers — which grammar rule did you miss?", link: "https://blog.prepscholar.com/act-grammar-rules" }
+        ]
+      },
+      {
+        name: "Sat", date: "June 28", isoDate: "2026-06-28", badge: "light day",
+        tasks: [
+          { tag: "science", text: "1 Science passage set only", link: "https://analyze-ed.com/improve-act-science-score.html" },
+          { tag: "rest", text: "Rest and recharge — big week coming up" }
+        ]
+      },
+      {
+        name: "Sun", date: "June 29", isoDate: "2026-06-29",
+        tasks: [
+          { tag: "full", text: "Take FULL practice ACT #2 (use extended time)", link: "https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" },
+          { tag: "full", text: "Score all four sections — log your scores above", link: "https://www.prepscholar.com/act/s/act-practice-tests" }
+        ]
+      }
+    ]
+  },
+  {
+    week: 3,
+    label: "June 30 – July 6",
+    theme: "Full timed tests",
+    days: [
+      {
+        name: "Mon", date: "June 30", isoDate: "2026-06-30",
+        tasks: [
+          { tag: "full", text: "Deep dive all wrong answers from Sunday's practice test", link: "https://www.prepscholar.com/act/s/act-practice-tests" },
+          { tag: "math", text: "Tutor session — biggest math gaps from practice test" }
+        ]
+      },
+      {
+        name: "Tue", date: "July 1", isoDate: "2026-07-01",
+        tasks: [
+          { tag: "english", text: "Drill weakest English sub-area from practice test", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "science", text: "Drill weakest Science passage type from practice test", link: "https://www.edisonos.com/act/act-science-tips-strategies" }
+        ]
+      },
+      {
+        name: "Wed", date: "July 2", isoDate: "2026-07-02",
+        tasks: [
+          { tag: "reading", text: "Full reading section timed", link: "https://www.princetonreview.com/college-advice/act-reading-strategies" },
+          { tag: "english", text: "30 English questions — weakest area only", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "math", text: "Tutor session" }
+        ]
+      },
+      {
+        name: "Thu", date: "July 3", isoDate: "2026-07-03",
+        tasks: [
+          { tag: "science", text: "Full Science section timed with extended time", link: "https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" },
+          { tag: "english", text: "Full English section timed with extended time", link: "https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" }
+        ]
+      },
+      {
+        name: "Fri", date: "July 4", isoDate: "2026-07-04", badge: "holiday",
+        tasks: [
+          { tag: "reading", text: "15–20 reading questions only — keep it light", link: "https://blog.prepscholar.com/how-to-improve-your-act-reading-score-tips" },
+          { tag: "rest", text: "Enjoy July 4th — you've earned it!" }
+        ]
+      },
+      {
+        name: "Sat", date: "July 5", isoDate: "2026-07-05", badge: "light day",
+        tasks: [
+          { tag: "english", text: "20 grammar questions", link: "https://www.khanacademy.org/test-prep/act/act-english" },
+          { tag: "science", text: "1 Science passage set", link: "https://analyze-ed.com/improve-act-science-score.html" }
+        ]
+      },
+      {
+        name: "Sun", date: "July 6", isoDate: "2026-07-06",
+        tasks: [
+          { tag: "full", text: "Final complete practice ACT #3 (use extended time)", link: "https://www.act.org/content/act/en/products-and-services/free-act-test-prep.html" },
+          { tag: "full", text: "Score all sections and log your scores — compare to Week 1 and Week 2!" }
+        ]
+      }
+    ]
+  },
+  {
+    week: 4,
+    label: "July 7 – July 11",
+    theme: "Simulate & peak",
+    days: [
+      {
+        name: "Mon", date: "July 7", isoDate: "2026-07-07",
+        tasks: [
+          { tag: "math", text: "Final tutor session — review math errors from Sunday test" },
+          { tag: "english", text: "Light review — grammar rules only, no new material", link: "https://blog.prepscholar.com/act-grammar-rules" }
+        ]
+      },
+      {
+        name: "Tue", date: "July 8", isoDate: "2026-07-08",
+        tasks: [
+          { tag: "science", text: "1 Science set — confidence builder, not a grind", link: "https://analyze-ed.com/improve-act-science-score.html" },
+          { tag: "reading", text: "1 Reading set — your strongest passage type only", link: "https://www.princetonreview.com/college-advice/act-reading-strategies" },
+          { tag: "english", text: "20 English questions — only the rules you know best", link: "https://www.khanacademy.org/test-prep/act/act-english" }
+        ]
+      },
+      {
+        name: "Wed", date: "July 9", isoDate: "2026-07-09", badge: "wind down",
+        tasks: [
+          { tag: "rest", text: "Confirm test location and time — double check your admission ticket" },
+          { tag: "rest", text: "Pack your bag: pencils, photo ID, snack, water, medication" },
+          { tag: "rest", text: "In bed by 9:30pm — sleep is the best last-minute prep" }
+        ]
+      },
+      {
+        name: "Thu", date: "July 10", isoDate: "2026-07-10", badge: "rest day",
+        tasks: [
+          { tag: "rest", text: "No studying today — seriously, none" },
+          { tag: "rest", text: "Take medication at the same time you will tomorrow morning" },
+          { tag: "rest", text: "Eat a real dinner, go to bed by 9pm, aim for 9 hours sleep" }
+        ]
+      },
+      {
+        name: "Fri 🎯", date: "July 11 — TEST DAY", isoDate: "2026-07-11", badge: "test day",
+        tasks: [
+          { tag: "rest", text: "Take medication on time — protein breakfast, no sugar crash" },
+          { tag: "rest", text: "Arrive 30 minutes early with all materials" },
+          { tag: "rest", text: "Use ALL your extended time — there is no prize for finishing early" },
+          { tag: "rest", text: "You did the work. Trust it. 🎉" }
+        ]
+      }
+    ]
+  }
+];
+
+// ========== STATE ==========
+let state = {
+  checks: {},
+  scores: [],
+  notes: "",
+  apiKey: "",
+  binId: "",
+  setupDismissed: false
+};
+
+let currentWeek = 0;
+let timerInterval = null;
+let timerSeconds = 25 * 60;
+let timerRunning = false;
+let timerBreak = false;
+let timerRound = 1;
+
+// ========== STORAGE ==========
+function loadState() {
+  try {
+    const saved = localStorage.getItem('act_study_state');
+    if (saved) state = { ...state, ...JSON.parse(saved) };
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('act_study_state', JSON.stringify(state));
+  } catch(e) {}
+  if (state.apiKey && state.binId) syncToCloud();
+  else if (state.apiKey && !state.binId) createBin();
+}
+
+async function createBin() {
+  try {
+    const res = await fetch('https://api.jsonbin.io/v3/b', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': state.apiKey,
+        'X-Bin-Name': 'ACT Study Plan'
+      },
+      body: JSON.stringify(state)
+    });
+    const data = await res.json();
+    if (data.metadata && data.metadata.id) {
+      state.binId = data.metadata.id;
+      localStorage.setItem('act_study_state', JSON.stringify(state));
+    }
+  } catch(e) {}
+}
+
+async function syncToCloud() {
+  document.getElementById('notesSaveStatus').textContent = 'Saving...';
+  document.getElementById('notesSaveStatus').className = 'save-status saving';
+  try {
+    await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': state.apiKey
+      },
+      body: JSON.stringify(state)
+    });
+    document.getElementById('notesSaveStatus').textContent = 'Saved to cloud ✓';
+    document.getElementById('notesSaveStatus').className = 'save-status saved';
+    setTimeout(() => {
+      document.getElementById('notesSaveStatus').textContent = 'Notes save automatically';
+      document.getElementById('notesSaveStatus').className = 'save-status';
+    }, 2000);
+  } catch(e) {
+    document.getElementById('notesSaveStatus').textContent = 'Cloud sync failed — saved locally';
+    document.getElementById('notesSaveStatus').className = 'save-status error';
+  }
+}
+
+async function loadFromCloud() {
+  if (!state.apiKey || !state.binId) return;
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`, {
+      headers: { 'X-Master-Key': state.apiKey }
+    });
+    const data = await res.json();
+    if (data.record) {
+      state = { ...state, ...data.record };
+      localStorage.setItem('act_study_state', JSON.stringify(state));
+    }
+  } catch(e) {}
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) return;
+  state.apiKey = key;
+  state.setupDismissed = true;
+  saveState();
+  document.getElementById('setupBanner').classList.add('hidden');
+}
+
+function dismissSetup() {
+  state.setupDismissed = true;
+  saveState();
+  document.getElementById('setupBanner').classList.add('hidden');
+}
+
+// ========== RENDER ==========
+function getTodayStr() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function getDaysUntilTest() {
+  const test = new Date('2026-07-11');
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const diff = Math.ceil((test - now) / (1000*60*60*24));
+  return Math.max(0, diff);
+}
+
+function getAllTasks() {
+  let tasks = [];
+  PLAN.forEach((w, wi) => w.days.forEach((d, di) => d.tasks.forEach((t, ti) => {
+    tasks.push({ weekIdx: wi, dayIdx: di, taskIdx: ti, key: `${wi}-${di}-${ti}` });
+  })));
+  return tasks;
+}
+
+function renderWeek(weekIdx) {
+  const week = PLAN[weekIdx];
+  const grid = document.getElementById('daysGrid');
+  document.getElementById('weekLabel').textContent = `${week.label} — ${week.theme}`;
+  const today = getTodayStr();
+  grid.innerHTML = week.days.map((day, di) => {
+    const isToday = day.isoDate === today;
+    const totalTasks = day.tasks.length;
+    const doneTasks = day.tasks.filter((t, ti) => state.checks[`${weekIdx}-${di}-${ti}`]).length;
+    const pct = totalTasks ? Math.round(doneTasks/totalTasks*100) : 0;
+    const allDone = doneTasks === totalTasks;
+    let badge = '';
+    if (isToday) badge = `<span class="day-badge badge-today">Today</span>`;
+    else if (day.badge === 'test day') badge = `<span class="day-badge badge-test">Test day!</span>`;
+    else if (day.badge) badge = `<span class="day-badge badge-rest">${day.badge}</span>`;
+    return `<div class="day-card ${isToday?'today':''} ${allDone?'completed-day':''}">
+      <div class="day-header">
+        <div>
+          <div class="day-header-name">${day.name} ${day.date}</div>
+        </div>
+        ${badge}
+      </div>
+      <div class="day-body">
+        ${day.tasks.map((task, ti) => {
+          const key = `${weekIdx}-${di}-${ti}`;
+          const checked = !!state.checks[key];
+          const linkHtml = task.link ? `<a class="task-link" href="${task.link}" target="_blank">Open resource ↗</a>` : '';
+          return `<div class="task-item">
+            <div class="task-check ${checked?'checked':''}" onclick="toggleTask('${key}')"></div>
+            <div class="task-content">
+              <span class="task-tag tag-${task.tag}">${task.tag.toUpperCase()}</span>
+              <span class="task-text ${checked?'done':''}">${task.text}</span>
+              ${linkHtml}
+            </div>
+          </div>`;
+        }).join('')}
+        <div class="day-complete-bar">
+          <span>${doneTasks}/${totalTasks} tasks</span>
+          <div class="mini-bar"><div class="mini-bar-fill" style="width:${pct}%"></div></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateProgress() {
+  const all = getAllTasks();
+  const done = all.filter(t => state.checks[t.key]).length;
+  const total = all.length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('overallProgressBar').style.width = pct + '%';
+  document.getElementById('overallProgressPct').textContent = pct + '%';
+  document.getElementById('totalDone').textContent = done;
+  document.getElementById('totalLeft').textContent = total - done;
+  document.getElementById('daysLeft').textContent = getDaysUntilTest();
+  updateParentTab();
+}
+
+function updateParentTab() {
+  const all = getAllTasks();
+  const done = all.filter(t => state.checks[t.key]).length;
+  document.getElementById('parent-done').textContent = done;
+  document.getElementById('parent-done-sub').textContent = `of ${all.length} total`;
+  document.getElementById('parent-days').textContent = getDaysUntilTest();
+
+  // Best score
+  if (state.scores.length) {
+    const best = Math.max(...state.scores.map(s => s.composite));
+    document.getElementById('parent-best').textContent = best;
+    const ss = calcSuperscore();
+    document.getElementById('parent-superscore').textContent = ss || '18';
+  }
+
+  // Week breakdown
+  const tbody = document.getElementById('parentWeekBody');
+  const focuses = ['Grammar rules & Science basics', 'Volume practice & full sections', 'Full timed practice tests', 'Simulate & peak performance'];
+  tbody.innerHTML = PLAN.map((w, wi) => {
+    const weekTasks = [];
+    w.days.forEach((d, di) => d.tasks.forEach((t, ti) => weekTasks.push(`${wi}-${di}-${ti}`)));
+    const wDone = weekTasks.filter(k => state.checks[k]).length;
+    const wTotal = weekTasks.length;
+    const wPct = wTotal ? Math.round(wDone/wTotal*100) : 0;
+    return `<tr>
+      <td><strong>Week ${w.week}</strong><br><span style="font-size:11px;color:var(--muted)">${w.label}</span></td>
+      <td>${wDone}</td>
+      <td>${wTotal}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:60px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+            <div style="width:${wPct}%;height:100%;background:var(--success);border-radius:2px"></div>
+          </div>
+          <span style="font-size:12px">${wPct}%</span>
+        </div>
+      </td>
+      <td style="font-size:12px;color:var(--muted)">${focuses[wi]}</td>
+    </tr>`;
+  }).join('');
+
+  // Score history in parent
+  renderScoreHistory('parentScoreHistory', true);
+
+  // Notes
+  document.getElementById('parentNotes').value = state.notes || '';
+}
+
+// ========== TASK TOGGLE ==========
+function toggleTask(key) {
+  state.checks[key] = !state.checks[key];
+  saveState();
+  showWeek(currentWeek, null);
+  updateProgress();
+}
+
+// ========== SCORE MODAL ==========
+function openScoreModal() {
+  document.getElementById('scoreModal').classList.add('open');
+  renderScoreHistory('scoreHistory', false);
+}
+function closeScoreModal() {
+  document.getElementById('scoreModal').classList.remove('open');
+  document.getElementById('inp-english').value = '';
+  document.getElementById('inp-math').value = '';
+  document.getElementById('inp-reading').value = '';
+  document.getElementById('inp-science').value = '';
+  document.getElementById('composite-display').textContent = '—';
+  document.getElementById('composite-gap').textContent = '';
+}
+function calcComposite() {
+  const e = parseInt(document.getElementById('inp-english').value)||0;
+  const m = parseInt(document.getElementById('inp-math').value)||0;
+  const r = parseInt(document.getElementById('inp-reading').value)||0;
+  const s = parseInt(document.getElementById('inp-science').value)||0;
+  const filled = [e,m,r,s].filter(x => x > 0);
+  if (filled.length === 4) {
+    const comp = Math.round((e+m+r+s)/4);
+    document.getElementById('composite-display').textContent = comp;
+    const gap = 24 - comp;
+    document.getElementById('composite-gap').textContent = gap > 0 ? `${gap} points from target` : gap === 0 ? 'At target! 🎉' : `${Math.abs(gap)} above target! 🎉`;
+  } else {
+    document.getElementById('composite-display').textContent = '—';
+    document.getElementById('composite-gap').textContent = '';
+  }
+}
+function saveScore() {
+  const e = parseInt(document.getElementById('inp-english').value);
+  const m = parseInt(document.getElementById('inp-math').value);
+  const r = parseInt(document.getElementById('inp-reading').value);
+  const s = parseInt(document.getElementById('inp-science').value);
+  if (!e || !m || !r || !s) return;
+  const comp = Math.round((e+m+r+s)/4);
+  const entry = { date: new Date().toLocaleDateString(), english: e, math: m, reading: r, science: s, composite: comp };
+  state.scores.push(entry);
+  saveState();
+  closeScoreModal();
+  updateProgress();
+}
+function calcSuperscore() {
+  if (!state.scores.length) return 18;
+  const bestE = Math.max(...state.scores.map(s => s.english));
+  const bestM = Math.max(...state.scores.map(s => s.math));
+  const bestR = Math.max(...state.scores.map(s => s.reading));
+  const bestS = Math.max(...state.scores.map(s => s.science));
+  return Math.round((bestE+bestM+bestR+bestS)/4);
+}
+function renderScoreHistory(containerId, showHeader) {
+  const el = document.getElementById(containerId);
+  if (!state.scores.length) {
+    el.innerHTML = '<p style="font-size:13px;color:var(--muted);">No practice scores logged yet.</p>';
+    return;
+  }
+  el.innerHTML = `
+    ${showHeader ? '<h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Practice test history</h4>' : '<h4 style="font-size:13px;font-weight:600;margin:1rem 0 8px;">Past scores</h4>'}
+    <div class="score-row header">
+      <span>Date</span><span>Eng</span><span>Math</span><span>Read</span><span>Sci</span><span>Composite</span>
+    </div>
+    ${state.scores.map(s => `
+      <div class="score-row">
+        <span style="color:var(--muted)">${s.date}</span>
+        <span>${s.english}</span>
+        <span>${s.math}</span>
+        <span>${s.reading}</span>
+        <span>${s.science}</span>
+        <span class="composite-cell" style="color:${s.composite>=24?'var(--success)':'var(--accent)'}">${s.composite}</span>
+      </div>
+    `).join('')}
+    <div class="score-row" style="margin-top:8px;font-weight:600">
+      <span style="color:var(--muted)">Superscore</span>
+      <span>${state.scores.length?Math.max(...state.scores.map(s=>s.english)):'—'}</span>
+      <span>${state.scores.length?Math.max(...state.scores.map(s=>s.math)):'—'}</span>
+      <span>${state.scores.length?Math.max(...state.scores.map(s=>s.reading)):'—'}</span>
+      <span>${state.scores.length?Math.max(...state.scores.map(s=>s.science)):'—'}</span>
+      <span class="composite-cell" style="color:var(--accent)">${calcSuperscore()}</span>
+    </div>
+  `;
+}
+
+// ========== WEEK NAV ==========
+function showWeek(idx, btn) {
+  currentWeek = idx;
+  if (btn) {
+    document.querySelectorAll('.week-nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderWeek(idx);
+}
+
+// ========== TAB SWITCHING ==========
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+  if (tab === 'parent') updateParentTab();
+  if (tab === 'student') {
+    // Refresh parent note display when returning to student tab
+    if (state.notes && state.notes.trim()) {
+      document.getElementById('studentParentNote').style.display = 'block';
+      document.getElementById('studentNoteText').textContent = state.notes;
+    }
+  }
+}
+
+// ========== NOTES ==========
+function saveNotes() {
+  state.notes = document.getElementById('parentNotes').value;
+  saveState();
+}
+
+// ========== TIMER ==========
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds/60);
+  const s = timerSeconds % 60;
+  document.getElementById('timerDisplay').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerStartBtn').textContent = 'Resume';
+    document.getElementById('timerDisplay').classList.remove('running','break-time');
+  } else {
+    timerRunning = true;
+    document.getElementById('timerStartBtn').textContent = 'Pause';
+    document.getElementById('timerDisplay').classList.toggle('break-time', timerBreak);
+    document.getElementById('timerDisplay').classList.toggle('running', !timerBreak);
+    timerInterval = setInterval(() => {
+      timerSeconds--;
+      updateTimerDisplay();
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        if (!timerBreak) {
+          timerBreak = true;
+          timerSeconds = 5 * 60;
+          document.getElementById('timerMode').textContent = 'Break time';
+          document.getElementById('timerMessage').textContent = 'Great work! Rest for 5 minutes.';
+          document.getElementById('timerDisplay').className = 'timer-display break-time';
+          document.getElementById('timerStartBtn').textContent = 'Start break';
+        } else {
+          timerBreak = false;
+          timerRound = Math.min(timerRound + 1, 4);
+          timerSeconds = 25 * 60;
+          document.getElementById('timerMode').textContent = 'Focus session';
+          document.getElementById('timerMessage').textContent = `Round ${timerRound} — you\'re on a roll!`;
+          document.getElementById('timerRounds').textContent = `Round ${timerRound} of 4`;
+          document.getElementById('timerDisplay').className = 'timer-display';
+          document.getElementById('timerStartBtn').textContent = 'Start';
+        }
+        updateTimerDisplay();
+        new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAA...').play().catch(()=>{});
+      }
+    }, 1000);
+  }
+}
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerBreak = false;
+  timerSeconds = 25 * 60;
+  timerRound = 1;
+  document.getElementById('timerDisplay').className = 'timer-display';
+  document.getElementById('timerMode').textContent = 'Focus session';
+  document.getElementById('timerMessage').textContent = 'Start a 25-minute study block';
+  document.getElementById('timerRounds').textContent = 'Round 1 of 4';
+  document.getElementById('timerStartBtn').textContent = 'Start';
+  updateTimerDisplay();
+}
+
+// ========== MOTIVATIONAL MESSAGES ==========
+const MOTIV = [
+  { emoji: "🎯", color: "#EAF1FC", textColor: "#0C3B7A", quote: "You don't have to be perfect — you just have to be better than last time.", sub: "Every practice question you do today is a point you're adding to July 11th.", label: "Today's focus" },
+  { emoji: "🧠", color: "#EAF3DE", textColor: "#1A4D22", quote: "The ACT doesn't test how smart you are. It tests how well you know the ACT.", sub: "You're learning a game — and games can be learned. You're already doing it.", label: "Remember this" },
+  { emoji: "⏱️", color: "#F0EBFC", textColor: "#3C2080", quote: "Extended time isn't a shortcut — it's your level playing field.", sub: "Use every minute. There is no prize for finishing early. Slow down and check your work.", label: "Use your advantage" },
+  { emoji: "📈", color: "#FDF0E3", textColor: "#7A3500", quote: "Your superscore is 18. Your target is 24. That's 6 points across 4 sections — less than 2 points per section.", sub: "Broken down like that, it's completely within reach. You're closer than you think.", label: "The math of success" },
+  { emoji: "💡", color: "#EAF1FC", textColor: "#0C3B7A", quote: "Science isn't testing your science knowledge. It's testing your ability to read graphs.", sub: "You've been doing that your whole life. Look at the axes, find the trend, answer the question.", label: "Science secret" },
+  { emoji: "✍️", color: "#EAF3DE", textColor: "#1A4D22", quote: "On ACT English, shorter is almost always right.", sub: "When in doubt, pick the answer that says the same thing with fewer words. The ACT hates redundancy.", label: "English shortcut" },
+  { emoji: "📖", color: "#FDF0E3", textColor: "#7A3500", quote: "Read the questions FIRST, then the passage.", sub: "You'll know exactly what to look for and stop wasting time on details that never appear in a question.", label: "Reading strategy" },
+  { emoji: "🔥", color: "#F0EBFC", textColor: "#3C2080", quote: "You scored a 20 in Reading once already. You know how to do this.", sub: "The goal isn't to learn something new — it's to be consistent. Extended time makes consistency possible.", label: "You've done it before" },
+  { emoji: "😴", color: "#EAF3DE", textColor: "#1A4D22", quote: "Sleep is the most underrated test prep tool there is.", sub: "One hour more sleep improves focus, working memory, and processing speed. Protect your nights.", label: "Rest matters" },
+  { emoji: "🏆", color: "#FDF0E3", textColor: "#7A3500", quote: "Bright Futures isn't just about the money — it's proof that you showed up when it mattered.", sub: "July 11th is your moment. Everything you're doing right now is building toward it.", label: "The bigger picture" },
+  { emoji: "💬", color: "#EAF1FC", textColor: "#0C3B7A", quote: "If you get stuck on a question, skip it and come back.", sub: "Never lose 3 minutes on one question when 5 easier ones are waiting. Momentum matters.", label: "Test day tip" },
+  { emoji: "🌱", color: "#EAF3DE", textColor: "#1A4D22", quote: "Every expert was once a beginner who refused to quit.", sub: "You've taken this test multiple times. Each one taught you something. This is the one where it clicks.", label: "Growth mindset" },
+  { emoji: "⭐", color: "#F0EBFC", textColor: "#3C2080", quote: "You got 86% of Geometry questions right. You're not bad at math — you're selectively great at it.", sub: "Statistics and Algebra are learnable. Geometry proves your brain works. Trust it.", label: "Your strength" },
+  { emoji: "🎓", color: "#FDF0E3", textColor: "#7A3500", quote: "Teaching something is the fastest way to truly learn it.", sub: "Try explaining today's concepts to someone else — a friend, a parent, even your pet. If you can teach it, you've got it.", label: "Feynman technique" },
+  { emoji: "💪", color: "#EAF1FC", textColor: "#0C3B7A", quote: "Four weeks from now, this is over — and you'll have done everything you could.", sub: "Start today. One task at a time. Check it off. Move to the next one. That's it.", label: "Just start" }
+];
+
+let motivIdx = 0;
+
+function renderMotiv() {
+  const m = MOTIV[motivIdx];
+  const banner = document.getElementById('motivBanner');
+  banner.style.background = m.color;
+  banner.style.color = m.textColor;
+  document.getElementById('motivEmoji').textContent = m.emoji;
+  document.getElementById('motivQuote').textContent = m.quote;
+  document.getElementById('motivSub').textContent = m.sub;
+  banner.querySelector('.motiv-label').textContent = m.label;
+  banner.querySelectorAll('.motiv-nav button').forEach(b => { b.style.color = m.textColor; b.style.borderColor = m.textColor; });
+}
+
+function nextMotiv() {
+  motivIdx = (motivIdx + 1) % MOTIV.length;
+  renderMotiv();
+}
+
+function prevMotiv() {
+  motivIdx = (motivIdx - 1 + MOTIV.length) % MOTIV.length;
+  renderMotiv();
+}
+
+// ========== PARENT PRACTICE TAB ==========
+function showPracticeSubject(subject, btn) {
+  document.querySelectorAll('.practice-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.practice-subject-btn').forEach(b => { b.classList.remove('active'); });
+  document.getElementById('panel-' + subject).classList.add('active');
+  btn.classList.add('active');
+  if (subject === 'math') {
+    btn.style.background = 'var(--math)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--math)';
+  }
+}
+
+function toggleConcept(id) {
+  const body = document.getElementById(id + '-body');
+  const toggle = document.getElementById(id + '-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+// ========== INIT ==========
+async function init() {
+  loadState();
+  if (state.apiKey && state.binId) await loadFromCloud();
+  if (state.setupDismissed) document.getElementById('setupBanner').classList.add('hidden');
+  if (state.apiKey) {
+    const inp = document.getElementById('apiKeyInput');
+    if (inp) inp.value = state.apiKey;
+  }
+
+  // Auto-jump to current week
+  const today = getTodayStr();
+  let foundWeek = 0;
+  PLAN.forEach((w, wi) => {
+    w.days.forEach(d => { if (d.isoDate === today) foundWeek = wi; });
+  });
+  currentWeek = foundWeek;
+  document.querySelectorAll('.week-nav-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === foundWeek);
+  });
+
+  renderWeek(currentWeek);
+  updateProgress();
+  updateTimerDisplay();
+
+  // Pick a daily motivational message based on day of year
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  motivIdx = dayOfYear % MOTIV.length;
+  renderMotiv();
+
+  // Show parent note to student if one exists
+  if (state.notes && state.notes.trim()) {
+    document.getElementById('studentParentNote').style.display = 'block';
+    document.getElementById('studentNoteText').textContent = state.notes;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
