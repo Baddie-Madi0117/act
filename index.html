@@ -1734,6 +1734,17 @@
       </div>
     </div>
 
+    <div class="section-divider">🖥️ Acely — primary digital practice platform</div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h4 style="color:var(--accent)">Acely ACT prep — your main daily practice tool</h4>
+        <a class="resource-link" href="https://acely.com/act" target="_blank">Acely ACT prep dashboard <span class="resource-link-desc">Open this first every study session. Do whatever the adaptive plan assigns — it knows your weak spots.</span></a>
+        <a class="resource-link" href="https://acely.com/act/act-reading-guide" target="_blank">Acely: ACT Reading guide 2026 <span class="resource-link-desc">Passage strategy, preview questions, paired passages — updated for enhanced ACT</span></a>
+        <a class="resource-link" href="https://acely.com/act-prep/act-math-guide" target="_blank">Acely: ACT Math guide & strategies <span class="resource-link-desc">Desmos tips, plugging in, backsolving, timed sprints</span></a>
+        <a class="resource-link" href="https://acely.com/act-prep/digital-act" target="_blank">Acely: Digital ACT tools guide <span class="resource-link-desc">How to use the answer eliminator, highlighter, line reader, bookmark, and Desmos on test day</span></a>
+      </div>
+    </div>
+
     <div class="section-divider">🎬 Videos, games & engaging tools</div>
     <div class="resource-grid">
       <div class="resource-card">
@@ -1775,68 +1786,71 @@ const PLAN = [
   {
     week: 1,
     label: "June 17 – June 23",
-    theme: "Learn strategies + Math self-study (no tutor this week)",
+    theme: "Learn the tools + build the foundation",
     days: [
       {
         name: "Tue", date: "June 17", isoDate: "2026-06-17",
         tasks: [
-          { tag: "science", text: "Watch SupertutorTV: ACT Science overview video (~10 min) — figures first, find the trend", link: "https://www.youtube.com/@SuperTutorTV" },
-          { tag: "science", text: "Complete 1 Data Representation passage set — go to figures BEFORE reading text", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "english", text: "Read PrepScholar ACT grammar rules guide — this is your English map for the whole plan", link: "https://blog.prepscholar.com/act-grammar-rules" },
-          { tag: "math", text: "Khan Academy: Mean, Median, Mode — watch the video lessons, then do the practice (your 0% area)", link: "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data" }
+          { tag: "full", text: "⭐ Set up Acely — enter your baseline score (18), goal (24), and test date (July 11). Let it build your study plan.", link: "https://acely.com/act" },
+          { tag: "full", text: "Take Acely's diagnostic practice test — this is Practice Test 1. Use the digital tools (eliminator, bookmark, scratch paper).", link: "https://acely.com/act" },
+          { tag: "english", text: "📖 While Acely scores your test: read PrepScholar grammar rules guide — your English map for the whole plan", link: "https://blog.prepscholar.com/act-grammar-rules" },
+          { tag: "math", text: "📱 Set up MyACT daily question at my.act.org — one official question every morning starting tomorrow", link: "https://my.act.org" }
         ]
       },
       {
         name: "Wed", date: "June 18", isoDate: "2026-06-18",
         tasks: [
-          { tag: "english", text: "Practice 20 Conventions questions — use the answer eliminator on screen — cross out wrong choices before committing", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "english", text: "🎮 Quizlet: search 'ACT grammar rules' — play Match or Gravity mode for 10 min to drill the rules you just read", link: "https://quizlet.com/subject/act/" },
-          { tag: "science", text: "Complete 1 Research Summary passage — label C (control) I (independent) D (dependent) for each experiment", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "math", text: "Khan Academy: Probability — AND vs OR rules, favorable outcomes over total outcomes", link: "https://www.khanacademy.org/math/statistics-probability/probability-library" }
+          { tag: "rest", text: "📱 MyACT daily question — do this at breakfast, 2 min", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session 1 — do whatever the adaptive plan assigns (~25 min). This is your core daily work.", link: "https://acely.com/act" },
+          { tag: "science", text: "🎬 BREAK: SupertutorTV — ACT Science overview video (~10 min). Figures first, find the trend.", link: "https://www.youtube.com/@SuperTutorTV" },
+          { tag: "english", text: "⭐ Acely session 2 — English focus. Use the answer eliminator on every question.", link: "https://acely.com/act" },
+          { tag: "math", text: "Khan Academy: Mean, Median, Mode — video lessons then practice (your 0% area, no tutor this week)", link: "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data" }
         ]
       },
       {
         name: "Thu", date: "June 19", isoDate: "2026-06-19",
         tasks: [
-          { tag: "english", text: "Watch SupertutorTV: ACT English grammar video (~10 min) — comma rules and sentence structure", link: "https://www.youtube.com/@SuperTutorTV" },
-          { tag: "english", text: "Practice Knowledge of Language — conciseness, transitions, redundancy. Shorter = better.", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "science", text: "Conflicting Viewpoints passage — read fully first, chart: Scientist 1 believes ___, Scientist 2 believes ___", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "reading", text: "Learn the strategy: preview ALL questions before reading a single word of the passage", link: "https://acely.com/act/act-reading-guide" },
-          { tag: "math", text: "Khan Academy: Algebra — solving for x, systems of equations, factoring quadratics", link: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — do whatever the plan assigns. Review all wrong answers using the AI tutor — ask it WHY for every mistake.", link: "https://acely.com/act" },
+          { tag: "english", text: "🎬 BREAK: SupertutorTV — ACT English grammar video (~10 min). Comma rules and sentence structure.", link: "https://www.youtube.com/@SuperTutorTV" },
+          { tag: "math", text: "Khan Academy: Probability — AND vs OR rules, favorable outcomes ÷ total outcomes", link: "https://www.khanacademy.org/math/statistics-probability/probability-library" },
+          { tag: "english", text: "🎮 BREAK: Quizlet — search 'ACT grammar rules', play Match or Gravity mode for 10 min", link: "https://quizlet.com/subject/act/" }
         ]
       },
       {
         name: "Fri", date: "June 20", isoDate: "2026-06-20",
         tasks: [
-          { tag: "english", text: "30 English questions mixed — Conventions AND Knowledge of Language, timed", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "science", text: "2 Science passage sets back to back — practice moving fast between figures", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "math", text: "Khan Academy: Functions — f(x) notation, evaluating functions, domain and range", link: "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:function" },
-          { tag: "math", text: "🎮 Quizlet: search 'ACT math formulas' — play Gravity mode to drill formulas. The ACT gives you NOTHING — memorize these.", link: "https://quizlet.com/subject/act/" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — Science focus today. Use CSI method (label C I D) on scratch paper for every experiment passage.", link: "https://acely.com/act" },
+          { tag: "science", text: "🎬 BREAK: SupertutorTV — ACT Science experiments video (~10 min)", link: "https://www.youtube.com/@SuperTutorTV" },
+          { tag: "math", text: "Khan Academy: Algebra — solving equations, systems of equations, factoring", link: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities" },
+          { tag: "full", text: "Log all this week's Acely wrong answers in the Wrong Answer Log — subject, concept, what you'll do differently" }
         ]
       },
       {
         name: "Sat", date: "June 21", isoDate: "2026-06-21", badge: "light day",
         tasks: [
-          { tag: "english", text: "😂 Prepmedians free tier — watch one comedy ACT English strategy video. If you laugh, you'll remember it on test day.", link: "https://prepmedians.com" },
-          { tag: "english", text: "15 grammar questions — keep it light, no timer, just practice", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "rest", text: "Move your body, rest, 9 hours sleep — big practice test tomorrow" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — one short session only, whatever it assigns (~25 min)", link: "https://acely.com/act" },
+          { tag: "english", text: "😂 Prepmedians — one free comedy ACT English video. If you laugh, you'll remember it.", link: "https://prepmedians.com" },
+          { tag: "rest", text: "Rest, move your body, 9 hours sleep — full practice test tomorrow" }
         ]
       },
       {
         name: "Sun", date: "June 22", isoDate: "2026-06-22",
         tasks: [
-          { tag: "full", text: "Take FULL practice ACT #1 — all 4 sections including Science, use your full extended time", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" },
-          { tag: "full", text: "Score all 4 sections and log them using the button at the top of this page" },
-          { tag: "math", text: "Sunday Feynman session with mom/dad — teach them: what is mean, median, mode? What is probability? If you can explain it, you own it." }
+          { tag: "full", text: "⭐ Acely full practice test #2 — all 4 sections with extended time. Use the digital tools throughout. This is your first real benchmark.", link: "https://acely.com/act" },
+          { tag: "full", text: "Score all sections and log in the app — compare to your diagnostic. Note every section that improved." },
+          { tag: "math", text: "Sunday Feynman session with mom/dad — teach them mean, median, mode and basic probability. If you can explain it, you own it." }
         ]
       },
       {
         name: "Mon", date: "June 23", isoDate: "2026-06-23",
         tasks: [
-          { tag: "full", text: "Review ALL wrong answers from Sunday's test — log every one in the Wrong Answer Log by subject and concept" },
-          { tag: "science", text: "Drill the Science passage type you missed most — CSI method every time", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "english", text: "Drill the grammar rule you missed most — 20 focused questions on that rule only", link: "https://blog.prepscholar.com/act-grammar-rules" },
-          { tag: "rest", text: "📱 Set up MyACT daily question at my.act.org — one official question every morning starting tomorrow, takes 2 minutes", link: "https://my.act.org" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely review session — use the AI tutor to work through every wrong answer from Sunday's test. Ask WHY for each one.", link: "https://acely.com/act" },
+          { tag: "full", text: "Log your top 5 most missed concepts in the Wrong Answer Log — these are your Week 2 targets" },
+          { tag: "math", text: "Khan Academy: Functions — f(x) notation, domain and range, reading graphs", link: "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:function" }
         ]
       }
     ]
@@ -1844,70 +1858,68 @@ const PLAN = [
   {
     week: 2,
     label: "June 24 – June 30",
-    theme: "Build volume + first tutor session",
+    theme: "Build volume — Acely drives the focus",
     days: [
       {
         name: "Tue", date: "June 24", isoDate: "2026-06-24",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — do this first, takes 2 minutes", link: "https://my.act.org" },
-          { tag: "science", text: "Watch SupertutorTV: ACT Science graphs and experiments video — reinforce CSI method", link: "https://www.youtube.com/@SuperTutorTV" },
-          { tag: "science", text: "2 Science sets — Scientific Investigation passages, label C I D for every experiment", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "english", text: "30 English questions timed — Conventions and Knowledge of Language mixed", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "math", text: "Khan Academy: Functions — evaluate f(x), domain and range, interpreting graphs", link: "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:function" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — Science focus. The plan knows what you missed Sunday. Let it lead.", link: "https://acely.com/act" },
+          { tag: "science", text: "🎬 BREAK: SupertutorTV — Conflicting Viewpoints video. This passage type needs a different approach.", link: "https://www.youtube.com/@SuperTutorTV" },
+          { tag: "math", text: "Khan Academy: Modeling — rate problems, percent, setting up word problems from scratch", link: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-word-problems" },
+          { tag: "math", text: "🎮 BREAK: Quizlet Gravity — ACT math formulas. The ACT gives you nothing — memorize these.", link: "https://quizlet.com/subject/act/" }
         ]
       },
       {
         name: "Wed", date: "June 25", isoDate: "2026-06-25",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing, 2 minutes", link: "https://my.act.org" },
-          { tag: "reading", text: "Full reading set — Literary Narrative and Social Science passages, preview ALL questions first", link: "https://open-exam-prep.com/practice/act-reading" },
-          { tag: "english", text: "Production of Writing questions — organization, transitions, topic development", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "english", text: "🎮 Kahoot — search 'ACT grammar' and play a set solo. You already know Kahoot from Teresa's sessions!", link: "https://kahoot.com" },
-          { tag: "math", text: "Khan Academy: Algebra — solving equations and systems of equations practice", link: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — English focus. Use AI tutor immediately on any wrong answer.", link: "https://acely.com/act" },
+          { tag: "english", text: "🎮 BREAK: Kahoot — search 'ACT grammar' and play solo. You know Kahoot from Teresa's sessions!", link: "https://kahoot.com" },
+          { tag: "reading", text: "⭐ Acely session — Reading focus. Preview questions before reading every passage. Use Line Reader if eyes drift.", link: "https://acely.com/act" }
         ]
       },
       {
         name: "Thu", date: "June 26", isoDate: "2026-06-26",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "science", text: "1 timed Science set — aim to finish each passage in under 5 minutes", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "english", text: "Full English section timed with extended time (~52 min, 50 questions)", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" },
-          { tag: "math", text: "Khan Academy: Modeling — rate problems, percent, setting up equations from word problems", link: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-word-problems" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely full English section timed — use extended time (~52 min). Answer eliminator on every question. Bookmark hard ones.", link: "https://acely.com/act" },
+          { tag: "full", text: "Acely AI tutor — review every wrong answer before moving on. This is the most important habit." },
+          { tag: "math", text: "Khan Academy: Number & Quantity — ratios, units, basic operations applied to word problems", link: "https://www.khanacademy.org/math/algebra" }
         ]
       },
       {
         name: "Fri", date: "June 27", isoDate: "2026-06-27",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "reading", text: "Full Reading section timed with extended time (~52 min)", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" },
-          { tag: "english", text: "Review all wrong English answers — log every missed rule in Wrong Answer Log" },
-          { tag: "science", text: "Review all wrong Science answers — which passage type was hardest?" },
-          { tag: "math", text: "🎮 Quizlet Gravity: ACT math formulas — drill until you get 10 in a row right", link: "https://quizlet.com/subject/act/" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely full Reading section timed — use extended time (~60 min). Preview ALL questions before reading.", link: "https://acely.com/act" },
+          { tag: "full", text: "Log all this week's wrong answers in the Wrong Answer Log — which concepts keep showing up?" },
+          { tag: "english", text: "🎮 BREAK: Quizlet Match — grammar rules you got wrong this week only", link: "https://quizlet.com/subject/act/" }
         ]
       },
       {
         name: "Sat", date: "June 28", isoDate: "2026-06-28", badge: "light day",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "science", text: "1 Science passage set — your strongest type, confidence mode", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "rest", text: "😂 Prepmedians: watch one comedy video on Reading or Science strategy — light and fun", link: "https://prepmedians.com" },
-          { tag: "rest", text: "Rest and recharge — big practice test tomorrow" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — one short session only, Science or English, whatever the plan assigns (~25 min)", link: "https://acely.com/act" },
+          { tag: "rest", text: "😂 Prepmedians — one comedy video on Reading or Science strategy", link: "https://prepmedians.com" },
+          { tag: "rest", text: "Rest and recharge — full practice test tomorrow. 9 hours sleep tonight." }
         ]
       },
       {
         name: "Sun", date: "June 29", isoDate: "2026-06-29",
         tasks: [
-          { tag: "full", text: "Take FULL practice ACT #2 with extended time — all 4 sections including Science", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" },
-          { tag: "full", text: "Score all 4 sections and log scores — compare to Practice Test 1, note every section that improved" },
-          { tag: "math", text: "Sunday Feynman session with mom/dad — pick the Math concept you felt shakiest on this week and teach it" }
+          { tag: "full", text: "⭐ Acely full practice test #3 — all 4 sections with extended time. This is your Week 2 benchmark.", link: "https://acely.com/act" },
+          { tag: "full", text: "Score all sections and log in the app — check both 3-section and 4-section composites. How close to 24?" },
+          { tag: "math", text: "Sunday Feynman session — teach mom/dad one Math concept you felt shakiest on this week" }
         ]
       },
       {
         name: "Mon", date: "June 30", isoDate: "2026-06-30",
         tasks: [
-          { tag: "math", text: "⭐ TUTOR SESSION 1 with Teresa — bring Practice Test 2 Math wrong answers, one-on-one review" },
-          { tag: "full", text: "Deep dive all wrong answers from Sunday — log everything in Wrong Answer Log by concept" },
-          { tag: "english", text: "Drill the English rule you missed most — 20 focused questions, that rule only", link: "https://open-exam-prep.com/practice/act-english" }
+          { tag: "math", text: "⭐ TUTOR SESSION 1 with Teresa — bring your Acely Math wrong answers from Sunday's test. One-on-one review.", link: "https://acely.com/act" },
+          { tag: "full", text: "⭐ Acely review — AI tutor on every wrong answer from Sunday. Log all new mistakes in Wrong Answer Log.", link: "https://acely.com/act" },
+          { tag: "english", text: "Drill the English rule you missed most this week — 20 focused Acely questions on that rule only", link: "https://acely.com/act" }
         ]
       }
     ]
@@ -1915,68 +1927,65 @@ const PLAN = [
   {
     week: 3,
     label: "July 1 – July 7",
-    theme: "Full timed tests + second tutor session",
+    theme: "Peak intensity — Acely + full timed sections",
     days: [
       {
         name: "Tue", date: "July 1", isoDate: "2026-07-01",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "science", text: "Watch SupertutorTV: Conflicting Viewpoints strategy video — this passage type needs a different approach", link: "https://www.youtube.com/@SuperTutorTV" },
-          { tag: "science", text: "Drill weakest Science passage type from Practice Test 2 — CSI method every time", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "english", text: "Drill weakest English rule from Practice Test 2 — 25 focused questions on that rule only", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "math", text: "Khan Academy: practice the specific Math topics Teresa flagged in Monday's session", link: "https://www.khanacademy.org/math/statistics-probability" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — drill whatever Teresa flagged in Monday's session plus Acely's adaptive focus", link: "https://acely.com/act" },
+          { tag: "science", text: "🎬 BREAK: SupertutorTV — ACT Science data interpretation video. Reinforce figures-first strategy.", link: "https://www.youtube.com/@SuperTutorTV" },
+          { tag: "full", text: "⭐ Acely session 2 — Science focus. CSI labels on scratch paper for every experiment.", link: "https://acely.com/act" }
         ]
       },
       {
         name: "Wed", date: "July 2", isoDate: "2026-07-02",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "reading", text: "Full Reading section timed — preview questions, anchor each paragraph", link: "https://open-exam-prep.com/practice/act-reading" },
-          { tag: "english", text: "25 English questions — weakest rule only, drill until it feels automatic", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "english", text: "🎮 Kahoot: play an ACT English grammar set — compete with yourself, beat your last score", link: "https://kahoot.com" },
-          { tag: "science", text: "1 timed Science set — aim to beat your Practice Test 2 Science score", link: "https://open-exam-prep.com/practice/act-science" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely full Reading section timed — extended time, preview questions, use Line Reader if eyes drift", link: "https://acely.com/act" },
+          { tag: "english", text: "🎮 BREAK: Kahoot — ACT English grammar, compete with yourself, beat last score", link: "https://kahoot.com" },
+          { tag: "full", text: "⭐ Acely English drill — your weakest rule only, 20 focused questions", link: "https://acely.com/act" }
         ]
       },
       {
         name: "Thu", date: "July 3", isoDate: "2026-07-03",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "science", text: "Full Science section timed with extended time (~52 min) — this is your bonus composite booster", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" },
-          { tag: "english", text: "Full English section timed with extended time (~52 min)", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely full Science section timed — extended time (~60 min). This is your bonus composite booster. Use every tool.", link: "https://acely.com/act" },
+          { tag: "full", text: "⭐ Acely full English section timed — extended time (~52 min). Answer eliminator every question.", link: "https://acely.com/act" }
         ]
       },
       {
         name: "Fri", date: "July 4", isoDate: "2026-07-04", badge: "holiday",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — just this one today, then put the phone down 🇺🇸", link: "https://my.act.org" },
-          { tag: "reading", text: "15 reading questions only — your strongest passage type, no pressure", link: "https://open-exam-prep.com/practice/act-reading" },
-          { tag: "rest", text: "😂 Prepmedians: one fun video if you feel like it — totally optional today. Happy 4th! 🎆", link: "https://prepmedians.com" }
+          { tag: "rest", text: "📱 MyACT daily question — just this one, then put the screen down 🇺🇸", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely — one short Reading session only (~20 min), your strongest passage type", link: "https://acely.com/act" },
+          { tag: "rest", text: "😂 Prepmedians — one fun video if you feel like it. Totally optional. Happy 4th! 🎆", link: "https://prepmedians.com" }
         ]
       },
       {
         name: "Sat", date: "July 5", isoDate: "2026-07-05", badge: "light day",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "english", text: "20 grammar questions — rules you know best, confidence mode", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "english", text: "🎮 Quizlet Match mode: grammar rules — fastest time yet. Make it a game.", link: "https://quizlet.com/subject/act/" },
-          { tag: "science", text: "1 Science passage set — fastest you have ever done it", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "rest", text: "Early night — full practice test tomorrow" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — English and Science only, confidence mode, ~25 min", link: "https://acely.com/act" },
+          { tag: "english", text: "🎮 Quizlet Match — grammar rules fastest time yet. Make it a game.", link: "https://quizlet.com/subject/act/" },
+          { tag: "rest", text: "Early night — full practice test tomorrow. 9 hours sleep." }
         ]
       },
       {
         name: "Sun", date: "July 6", isoDate: "2026-07-06",
         tasks: [
-          { tag: "full", text: "Final complete practice ACT #3 with extended time — all 4 sections", link: "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" },
-          { tag: "full", text: "Score all 4 sections — log scores and check both 3-section and 4-section composites. How close to 24?" },
-          { tag: "math", text: "Sunday Feynman session — teach mom/dad your strongest Math concept to lock in confidence before test week" }
+          { tag: "full", text: "⭐ Acely full practice test #4 — all 4 sections with extended time. Final benchmark before test week.", link: "https://acely.com/act" },
+          { tag: "full", text: "Score all sections and log in the app — check both 3-section and 4-section composites. You're almost there." },
+          { tag: "math", text: "Sunday Feynman session — teach mom/dad your strongest Math concept. Lock in the confidence." }
         ]
       },
       {
         name: "Mon", date: "July 7", isoDate: "2026-07-07",
         tasks: [
-          { tag: "math", text: "⭐ TUTOR SESSION 2 with Teresa — bring Practice Test 3 Math wrong answers, final targeted drill" },
-          { tag: "english", text: "Light English review — known grammar rules only, no new material", link: "https://blog.prepscholar.com/act-grammar-rules" },
-          { tag: "full", text: "Review all Practice Test 3 wrong answers — log in Wrong Answer Log" }
+          { tag: "math", text: "⭐ TUTOR SESSION 2 with Teresa — bring Acely Math wrong answers from Sunday's test. Final targeted drill.", link: "https://acely.com/act" },
+          { tag: "full", text: "⭐ Acely review — AI tutor on every wrong answer from Sunday. These are the last new things you'll learn.", link: "https://acely.com/act" },
+          { tag: "full", text: "Log all Practice Test 4 wrong answers in Wrong Answer Log — this is your final review list for Tuesday" }
         ]
       }
     ]
@@ -1984,17 +1993,16 @@ const PLAN = [
   {
     week: 4,
     label: "July 8 – July 11",
-    theme: "Confidence mode — trust the work",
+    theme: "Confidence mode — trust what you've built",
     days: [
       {
         name: "Tue", date: "July 8", isoDate: "2026-07-08",
         tasks: [
-          { tag: "rest", text: "📱 MyACT daily question — first thing", link: "https://my.act.org" },
-          { tag: "science", text: "1 Science set — your favorite passage type, pure confidence builder", link: "https://open-exam-prep.com/practice/act-science" },
-          { tag: "reading", text: "1 Reading set — your strongest passage type, preview questions first", link: "https://open-exam-prep.com/practice/act-reading" },
-          { tag: "english", text: "20 English questions — only the rules you know cold", link: "https://open-exam-prep.com/practice/act-english" },
-          { tag: "math", text: "10 Geometry questions — your 86% strength. Remind yourself you CAN do math.", link: "https://open-exam-prep.com/practice/act-math" },
-          { tag: "english", text: "🎮 Quizlet Gravity: one final grammar rules run — lock them in for good", link: "https://quizlet.com/subject/act/" }
+          { tag: "rest", text: "📱 MyACT daily question — breakfast", link: "https://my.act.org" },
+          { tag: "full", text: "⭐ Acely session — confidence mode. Let the plan assign easy wins today. Use every digital tool smoothly.", link: "https://acely.com/act" },
+          { tag: "science", text: "⭐ Acely Science — your favorite passage type only. One session, ~20 min. Finish strong.", link: "https://acely.com/act" },
+          { tag: "math", text: "⭐ Acely Math — Geometry questions only, your 86% strength. Remind yourself you CAN do math.", link: "https://acely.com/act" },
+          { tag: "english", text: "🎮 Quizlet Gravity — one final grammar rules run. Lock them in for good.", link: "https://quizlet.com/subject/act/" }
         ]
       },
       {
@@ -2002,28 +2010,28 @@ const PLAN = [
         tasks: [
           { tag: "rest", text: "📱 MyACT daily question — last one before test day", link: "https://my.act.org" },
           { tag: "rest", text: "Confirm test center location, time, and parking — look it up now so tomorrow has zero surprises" },
-          { tag: "rest", text: "Pack your bag: photo ID, printed admission ticket, approved calculator (optional), snack, water, medication — no pencils needed, it's digital" },
-          { tag: "rest", text: "Watch one SupertutorTV pep talk or strategy recap video — something short and positive", link: "https://www.youtube.com/@SuperTutorTV" },
-          { tag: "rest", text: "Protein dinner, in bed by 9:30pm — this is the most important prep you can do tonight" }
+          { tag: "rest", text: "Pack your bag: photo ID, printed admission ticket, approved calculator (optional — Desmos is built in), snack, water, medication" },
+          { tag: "rest", text: "🎬 Watch one SupertutorTV pep talk — something short and positive, no new content", link: "https://www.youtube.com/@SuperTutorTV" },
+          { tag: "rest", text: "Protein dinner. In bed by 9:30pm. This is the most important prep left." }
         ]
       },
       {
         name: "Thu", date: "July 10", isoDate: "2026-07-10", badge: "rest day",
         tasks: [
-          { tag: "rest", text: "No studying today — zero. Your brain needs to consolidate everything it learned." },
-          { tag: "rest", text: "Take your medication at the exact same time as you plan to tomorrow morning" },
-          { tag: "rest", text: "Eat well, go to bed by 9pm, aim for 9 hours — this is the best prep left" }
+          { tag: "rest", text: "No Acely. No studying. No practice questions. Zero. Your brain needs to consolidate." },
+          { tag: "rest", text: "Take your medication at the exact same time you plan to tomorrow morning" },
+          { tag: "rest", text: "Eat a real dinner. In bed by 9pm. 9 hours sleep. This IS the prep." }
         ]
       },
       {
         name: "Fri 🎯", date: "July 11 — TEST DAY", isoDate: "2026-07-11", badge: "test day",
         tasks: [
-          { tag: "rest", text: "Medication on time — protein breakfast (eggs, not cereal). No sugar crash." },
-          { tag: "rest", text: "Arrive 30 minutes early — they give you scratch paper at your seat. That's where all your Math work and Science CSI labels go." },
-          { tag: "rest", text: "English: shorter answer wins. Math: use Desmos for graphs, only need a 20 — bookmark hard ones and move on. Reading: preview questions first, use Line Reader if eyes drift. Science: figures first, find the trend." },
-          { tag: "rest", text: "Use the answer eliminator on EVERY question — cross out 2 wrong choices before you pick. Use bookmark to flag and come back. Never sit stuck." },
+          { tag: "rest", text: "Medication on time — protein breakfast (eggs, not sugar cereal). No crash." },
+          { tag: "rest", text: "Arrive 30 minutes early — they give you scratch paper at your seat. Math work and Science CSI labels go there." },
+          { tag: "rest", text: "Answer eliminator on EVERY question — cross out 2 wrong choices before committing. Bookmark hard ones, never sit stuck." },
+          { tag: "rest", text: "English: shorter answer wins. Math: use Desmos, you only need a 20. Reading: preview questions, Line Reader if eyes drift. Science: figures first, find the trend." },
           { tag: "rest", text: "Use EVERY minute of your extended time. There is no prize for finishing early." },
-          { tag: "rest", text: "You did four weeks of work. Trust it completely. 🎉" }
+          { tag: "rest", text: "Four weeks of work is locked in your brain. Trust it completely. You've got this. 🎉" }
         ]
       }
     ]
